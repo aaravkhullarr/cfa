@@ -1,0 +1,17 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" rx="4" fill="#111111"/>
+  
+  <!-- Simplified robot head -->
+  <circle cx="16" cy="12" r="6" fill="white"/>
+  <circle cx="16" cy="12" r="5" fill="#000000"/>
+  
+  <!-- Robot eyes -->
+  <circle cx="14" cy="12" r="1" fill="white"/>
+  <circle cx="18" cy="12" r="1" fill="white"/>
+  
+  <!-- Wavy lines -->
+  <path d="M6 18 C10 16 12 20 16 18 C20 16 22 20 26 18" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M6 22 C10 20 12 24 16 22 C20 20 22 24 26 22" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M6 26 C10 24 12 28 16 26 C20 24 22 28 26 26" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+</svg> 
