@@ -24,6 +24,7 @@
             --card-bg: #1F1F2E;
             --card-shadow: rgba(0, 0, 0, 0.3);
             --dark-bg: #0A0A0F;
+            --darker-bg: #070709; /* Even darker background */
             --star-color: #FBBF24;
             --font-primary: 'proxima-nova', 'Satoshi', sans-serif;
         }
@@ -99,7 +100,11 @@
             color: var(--text-light);
             line-height: 1.6;
             letter-spacing: -0.022em;
-            background-color: var(--dark-bg);
+            background-color: #070709; /* Dark background */
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none" stroke="%232DD4BF" stroke-width="0.2" opacity="0.08"/></svg>'),
+                radial-gradient(circle at 50% 0%, rgba(45, 212, 191, 0.03) 0%, rgba(7, 7, 9, 0) 50%);
+            background-attachment: fixed;
             overflow-x: hidden;
         }
 
@@ -122,7 +127,7 @@
 
         /* Hero Section Styles */
         .hero-section {
-            background: var(--dark-bg) url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" opacity="0.2"/></svg>');
+            background-color: transparent;
             min-height: 90vh;
             display: flex;
             flex-direction: column;
@@ -134,32 +139,34 @@
         }
 
         .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(45, 212, 191, 0.1) 0%, rgba(10, 10, 15, 0) 60%);
-            pointer-events: none;
-            z-index: 1;
+            display: none;
         }
-        
+
         .hero-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="%232DD4BF" opacity="0.15"/></svg>');
-            background-repeat: repeat;
-            pointer-events: none;
-            z-index: 0;
+            display: none;
+        }
+
+        /* Common section background styling */
+        .partners-section,
+        .offerings-section,
+        .features-section,
+        .email-signup-section,
+        footer {
+            background-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partners-section::before,
+        .offerings-section::before,
+        .features-section::before,
+        .email-signup-section::before,
+        footer::before {
+            display: none;
         }
         
         .nav-container {
-            background: rgba(31, 31, 46, 0.5);
+            background: rgba(7, 7, 9, 0.7);
             border-bottom: none;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -175,11 +182,53 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 6px 16px rgba(45, 212, 191, 0.2);
             transition: all 0.3s ease;
             border-radius: 40px;
             opacity: 1;
             visibility: visible;
+            border: 1px solid rgba(45, 212, 191, 0.15);
+        }
+        
+        /* Add top glow effect */
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 5%;
+            width: 90%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.6), transparent);
+            z-index: -1;
+        }
+        
+        /* Bottom underlight effect */
+        .nav-container::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: radial-gradient(ellipse at top, rgba(45, 212, 191, 0.3), transparent 80%);
+            filter: blur(8px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: pulseGlow 4s infinite alternate;
+            pointer-events: none;
+        }
+        
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.4;
+                filter: blur(8px);
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0.7;
+                filter: blur(10px);
+                transform: translateY(2px);
+            }
         }
         
         .nav-logo {
@@ -193,13 +242,13 @@
             width: 32px;
             border-radius: 8px;
         }
-
+        
         .nav-logo span {
             font-size: 18px;
             font-weight: 600;
             color: var(--text-light);
         }
-
+        
         .nav-links {
             display: flex;
             gap: 16px;
@@ -318,23 +367,27 @@
             justify-content: center;
         }
 
-        .btn-primary {
+        .btn-primary, .btn-secondary, .contact-btn, .signup-btn {
             font-family: var(--font-primary);
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
+            border-radius: 4px;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary, .signup-btn {
             color: var(--dark-bg);
             background: var(--primary-light);
             border: none;
-            border-radius: 30px;
-            padding: 16px 32px;
-            cursor: pointer;
-            transition: all 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0 0 15px rgba(45, 212, 191, 0.5);
-            position: relative;
-            overflow: hidden;
         }
 
-        .btn-primary::before {
+        .btn-primary::before, .signup-btn::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -345,37 +398,105 @@
             transform: rotate(30deg);
             transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             opacity: 0;
-            z-index: 1;
+            z-index: -1;
             pointer-events: none;
         }
 
-        .btn-primary:hover::before {
+        .btn-primary:hover::before, .signup-btn:hover::before {
             opacity: 1;
             transform: rotate(30deg) translate(10%, 10%);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
+        .btn-primary:hover, .signup-btn:hover {
+            transform: translateY(-2px) scale(1.025);
             box-shadow: 0 0 20px rgba(45, 212, 191, 0.7);
         }
 
-        .btn-secondary {
-            font-family: var(--font-primary);
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--primary-light);
-            background: transparent;
-            border: 2px solid var(--primary-light);
-            border-radius: 30px;
-            padding: 16px 32px;
-            cursor: pointer;
-            transition: all 0.2s ease, box-shadow 0.3s ease;
+        .btn-primary:active, .signup-btn:active {
+            transform: translateY(1px) scale(0.98);
         }
 
-        .btn-secondary:hover {
+        .btn-primary::after, .signup-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(to top, rgba(45, 212, 191, 0) 40%, rgba(45, 212, 191, 0.8) 50%, rgba(45, 212, 191, 0) 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            transform: translateY(100%);
+            animation: scanAnimation 1.5s linear infinite;
+        }
+
+        .btn-primary:hover::after, .signup-btn:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes scanAnimation {
+            0% {
+                transform: translateY(100%);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        .btn-secondary, .contact-btn {
+            color: var(--primary-light);
+            background: transparent;
+            border: 1px solid var(--primary-light);
+        }
+
+        .btn-secondary:hover, .contact-btn:hover {
             background: rgba(45, 212, 191, 0.1);
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.025);
             box-shadow: 0 0 15px rgba(45, 212, 191, 0.3);
+        }
+
+        .btn-secondary:active, .contact-btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        .btn-secondary::after, .contact-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(to top, rgba(45, 212, 191, 0) 40%, rgba(45, 212, 191, 0.4) 50%, rgba(45, 212, 191, 0) 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            transform: translateY(100%);
+            animation: scanAnimation 1.8s linear infinite;
+        }
+
+        .btn-secondary:hover::after, .contact-btn:hover::after {
+            opacity: 1;
+        }
+
+        .contact-btn {
+            padding: 8px 18px;
+            font-size: 14px;
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            font-family: 'proxima-nova', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        .scramble-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Remove lock icon styling */
+        .lock-icon {
+            display: none;
         }
 
         .rating-container {
@@ -438,10 +559,10 @@
         /* Partners section */
         .partners-section {
             padding: 60px 0;
-            background: var(--dark-bg) url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="%232DD4BF" opacity="0.2"/></svg>');
             position: relative;
             z-index: 5;
             margin-top: -80px;
+            background: none;
         }
 
         .partners-title {
@@ -459,31 +580,17 @@
 
         .partners-wrapper {
             position: relative;
-            overflow: hidden;
-            padding: 10px 40px;
+            overflow: visible;
+            padding: 10px 0;
             margin: 0 auto;
             max-width: 1200px;
+            background: transparent;
+            border: none;
         }
 
         .partners-wrapper::before, 
         .partners-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 120px;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .partners-wrapper::before {
-            left: 0;
-            background: linear-gradient(90deg, var(--dark-bg) 0%, rgba(10, 10, 15, 0) 100%);
-        }
-
-        .partners-wrapper::after {
-            right: 0;
-            background: linear-gradient(90deg, rgba(10, 10, 15, 0) 0%, var(--dark-bg) 100%);
+            display: none;
         }
 
         .logo-carousel {
@@ -491,6 +598,7 @@
             width: max-content;
             animation: scroll 25s linear infinite;
             padding: 10px 0;
+            background: transparent;
         }
 
         @keyframes scroll {
@@ -510,6 +618,7 @@
             margin: 0 20px;
             height: 90px;
             position: relative;
+            background: transparent;
         }
 
         .logo-slide img {
@@ -527,74 +636,18 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .logo-slide:hover img {
-            filter: none;
-            transform: scale(1.08);
-            box-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
-            border-color: rgba(45, 212, 191, 0.6);
-        }
-
-        /* Testimonial Section */
-        .testimonial-section {
-            display: none;
-        }
-
-        .testimonial-section::before {
-            display: none;
-        }
-
-        /* Testimonial Carousel */
-        .testimonial-carousel {
-            display: none;
-        }
-
-        .carousel-container {
-            display: none;
-        }
-
-        .testimonial-card {
-            display: none;
-        }
-
-        .testimonial-card.left {
-            display: none;
-        }
-
-        .testimonial-card.center {
-            display: none;
-        }
-
-        .testimonial-card.right {
-            display: none;
-        }
-
-        .testimonial-card::before {
-            display: none;
-        }
-
-        .testimonial-avatar {
-            display: none;
-        }
-
-        .testimonial-avatar img {
-            display: none;
-        }
-
-        .testimonial-quote {
-            display: none;
-        }
-
-        .testimonial-meta {
-            display: none;
+        /* Modify the container for partners section */
+        .partners-section .container {
+            background: transparent;
+            overflow: visible;
         }
 
         /* Features Section */
         .features-section {
-            background: var(--dark-bg);
-            padding: 100px 0 80px;
+            padding: 80px 0 80px;
             position: relative;
             overflow: hidden;
-            margin-top: -40px;
+            margin-top: 0;
         }
 
         .features-container {
@@ -611,18 +664,20 @@
             flex: 0 0 calc(50% - 12px);
             max-width: calc(50% - 12px);
             width: 100%;
-            background: rgba(10, 10, 15, 0.95);
+            background: rgba(7, 7, 9, 0.8);
             border-radius: 16px;
             padding: 30px;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(45, 212, 191, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(45, 212, 191, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
             margin-bottom: 24px;
             height: 340px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
 
         .feature-card:hover {
@@ -870,6 +925,8 @@
             text-align: center;
             color: var(--text-light);
             margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
         }
 
         .section-subtitle {
@@ -882,6 +939,8 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
+            z-index: 1;
         }
 
         .section-header {
@@ -902,10 +961,6 @@
                 gap: 12px;
             }
             
-            .testimonial-carousel {
-                width: 90%;
-            }
-            
             .feature-card {
                 flex: 0 0 100%;
                 max-width: 100%;
@@ -917,7 +972,7 @@
                 font-size: 36px;
             }
             
-            .testimonial-card {
+            .feature-card {
                 width: 280px;
                 height: 220px;
             }
@@ -931,7 +986,6 @@
 
         /* Footer */
         footer {
-            background: var(--dark-bg) url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none" stroke="rgba(45, 212, 191, 0.2)" stroke-width="0.5" opacity="0.1"/></svg>');
             padding: 80px 0 40px;
             position: relative;
             overflow: hidden;
@@ -943,7 +997,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 1px;
             background: linear-gradient(90deg, var(--dark-bg), var(--primary-light), var(--dark-bg));
             opacity: 0.8;
         }
@@ -1040,21 +1094,9 @@
 
         /* Email Signup Section */
         .email-signup-section {
-            background: var(--dark-bg) url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none" stroke="%232DD4BF" stroke-width="0.2" opacity="0.1"/></svg>');
             padding: 100px 0;
             position: relative;
             overflow: hidden;
-        }
-
-        .email-signup-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(45, 212, 191, 0.07) 0%, rgba(10, 10, 15, 0) 70%);
-            pointer-events: none;
         }
 
         .email-signup-container {
@@ -1062,13 +1104,15 @@
             margin: 0 auto;
             text-align: center;
             padding: 40px;
-            background: rgba(31, 31, 46, 0.6);
+            background: rgba(7, 7, 9, 0.9);
             border-radius: 16px;
-            border: 1px solid rgba(45, 212, 191, 0.1);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(45, 212, 191, 0.2);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(45, 212, 191, 0.2);
             position: relative;
             z-index: 2;
             animation: fadeInUp 0.8s ease forwards;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
 
         .email-signup-container::before {
@@ -1167,6 +1211,155 @@
                 padding: 14px 20px;
             }
         }
+
+        .offerings-section {
+            padding: 100px 0 60px;
+            position: relative;
+            overflow: hidden;
+            margin-top: -40px;
+        }
+
+        .offerings-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: 60px;
+            flex-wrap: nowrap;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 24px;
+        }
+
+        .container .offerings-container {
+            max-width: 100%;
+        }
+
+        .offering-card {
+            flex: 1;
+            height: 480px;
+            background: rgba(7, 7, 9, 0.8);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid var(--primary-light);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.15s ease;
+            min-width: 0;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .offering-card:hover {
+            transform: translateY(-4px);
+            border-color: #38E6C6;
+        }
+
+        /* Offering image base styles */
+        .offering-image {
+            width: 100%;
+            height: 220px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(10, 10, 15, 0.5);
+            position: relative;
+            border: 1px solid rgba(45, 212, 191, 0.1);
+            margin-bottom: 16px;
+        }
+
+        /* AI Voice Agents specific styling */
+        .ai-voice-card .offering-image {
+            background-color: #070709;
+        }
+
+        /* Consistent image styling */
+        .offering-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        /* Ensure consistent title spacing */
+        .offering-title {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin: 0 0 12px 0;
+            line-height: 1.3;
+            padding: 0;
+        }
+
+        .offering-description {
+            font-family: var(--font-primary);
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 32px;
+        }
+
+        /* Additional responsive adjustments */
+        @media (max-width: 1280px) {
+            .offerings-container {
+                max-width: 100%;
+                padding: 0 40px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .offerings-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 30px;
+            }
+            
+            .offering-card {
+                flex: 0 0 calc(50% - 15px);
+                width: calc(50% - 15px);
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .offering-card {
+                flex: 0 0 100%;
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .offerings-container {
+                padding: 0 20px;
+            }
+        }
+
+        /* Add a subtle cyberpunk grid overlay to the entire page */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(45, 212, 191, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
@@ -1175,7 +1368,7 @@
             <div class="nav-logo">
                 <img src="IMG_3873.jpeg" alt="Chatflow Automations">
                 <span>Chatflow Automations</span>
-            </div>
+    </div>
             <div class="nav-links">
                 <a href="#">About Us</a>
                 <a href="#">Features</a>
@@ -1183,18 +1376,24 @@
                 <a href="#">Analytics</a>
                 <a href="#">Pricing</a>
                 <a href="#">Help Center</a>
-                <button class="contact-btn">Contact Sales</button>
+                <button class="contact-btn scramble-button" data-target-text="Contact Sales">
+                    <span class="button-text">Contact Sales</span>
+                </button>
             </div>
         </div>
 
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-headline" style="animation: fadeInUp 0.8s ease forwards;">40% of your workweek is eaten<br>by repetitive tasks</h1>
-                <p class="hero-subtext" style="animation: fadeInUp 0.8s ease forwards 0.2s; opacity: 0;">We design, implement, and manage AI-driven solutions to your frontend & backend<br>so you can focus on growth while we handle the busy work</p>
+                <p class="hero-subtext" style="animation: fadeInUp 0.8s ease forwards 0.2s; opacity: 0;">We design, implement, and manage AI-driven solutions for your frontend & backend<br>—so you can focus on growth while we handle the busy work.</p>
                 <div class="hero-buttons" style="animation: fadeInUp 0.8s ease forwards 0.4s; opacity: 0;">
-                    <button class="btn-primary">Get Started</button>
-                    <button class="btn-secondary">Schedule a Demo</button>
-                </div>
+                    <button class="btn-primary scramble-button" data-target-text="Get Started">
+                        <span class="button-text">Get Started</span>
+                    </button>
+                    <button class="btn-secondary scramble-button" data-target-text="Schedule a Demo">
+                        <span class="button-text">Schedule a Demo</span>
+                    </button>
+                    </div>
                 <div class="rating-container" style="animation: fadeInUp 0.8s ease forwards 0.6s; opacity: 0;">
                     <div class="star-rating">
                         <span class="star">★</span>
@@ -1204,8 +1403,8 @@
                         <span class="star">★</span>
                     </div>
                     <span class="rating-text">Trusted by 10+ companies</span>
+                    </div>
                 </div>
-            </div>
         </div>
     </section>
 
@@ -1256,23 +1455,58 @@
         </div>
     </section>
 
+    <section class="offerings-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Offerings</h2>
+                <p class="section-subtitle">Comprehensive AI solutions tailored to your business needs</p>
+                </div>
+            
+            <div class="offerings-container">
+                <div class="offering-card ai-voice-card">
+                    <div class="offering-image">
+                        <img src="image.webp" alt="AI Voice Agents">
+                </div>
+                    <h3 class="offering-title">AI Voice Agents</h3>
+                    <p class="offering-description">Intelligent voice assistants that handle calls and customer interactions with human-like conversations. Perfect for customer service, sales, and appointment scheduling.</p>
+                </div>
+                
+                <div class="offering-card">
+                    <div class="offering-image">
+                        <img src="Lyro-conversation.png" alt="Conversational Chatbots">
+                    </div>
+                    <h3 class="offering-title">Conversational Chatbots</h3>
+                    <p class="offering-description">Sophisticated chat solutions that engage users with natural language understanding and processing. Available 24/7 to answer inquiries and guide customers through digital experiences.</p>
+                </div>
+                
+                <div class="offering-card">
+                    <div class="offering-image">
+                        <img src="1_yEUGIR8d-ZBoIvDMNTyTNw.png" alt="Backend Automation">
+                    </div>
+                    <h3 class="offering-title">Backend Automation</h3>
+                    <p class="offering-description">Streamline complex processes and eliminate repetitive tasks with intelligent workflow automation. Connect your existing systems and create seamless workflows to boost efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="features-section">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">An end-to-end solution for repetitive tasks</h2>
-            </div>
+                </div>
             
             <div class="features-container">
                 <div class="feature-card">
                     <div class="feature-header">
-                        <h3 class="feature-title">Growth <span>→</span></h3>
-                    </div>
+                        <h3 class="feature-title">Growth</h3>
+                </div>
                     <p class="feature-description">Generate more pipeline in a fraction of the time</p>
                     
                     <div class="feature-stat">
                         <div class="feature-stat-title">Pipeline generated</div>
                         <div class="feature-stat-value">$15M</div>
-                    </div>
+                </div>
                     
                     <div class="feature-graphic">
                         <div class="bar-chart">
@@ -1288,7 +1522,7 @@
                 
                 <div class="feature-card">
                     <div class="feature-header">
-                        <h3 class="feature-title">Marketing <span>→</span></h3>
+                        <h3 class="feature-title">Marketing</h3>
                     </div>
                     <p class="feature-description">Turn automated outbound into your best demand gen channel</p>
                     
@@ -1303,7 +1537,7 @@
                 
                 <div class="feature-card">
                     <div class="feature-header">
-                        <h3 class="feature-title">RevOps <span>→</span></h3>
+                        <h3 class="feature-title">RevOps</h3>
                     </div>
                     <p class="feature-description">Be the reason your revenue team beats pipeline goals</p>
                     
@@ -1318,7 +1552,7 @@
                 
                 <div class="feature-card">
                     <div class="feature-header">
-                        <h3 class="feature-title">Sales <span>→</span></h3>
+                        <h3 class="feature-title">Sales</h3>
                     </div>
                     <p class="feature-description">Put prospecting and account research on autopilot</p>
                     
@@ -1349,7 +1583,9 @@
                 <p class="signup-subtitle">Join us today and transform the way your business handles repetitive tasks.</p>
                 <div class="email-form">
                     <input type="email" class="email-input" placeholder="Enter your email address">
-                    <button class="signup-btn">Get Started</button>
+                    <button class="signup-btn scramble-button" data-target-text="Get Started">
+                        <span class="button-text">Get Started</span>
+                    </button>
                 </div>
                 <p class="privacy-note">We respect your privacy. No spam ever.</p>
             </div>
@@ -1399,6 +1635,57 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Text scrambling for buttons
+            const CHARS = "!@#$%^&*():{};|,.<>/?";
+            const CYCLES_PER_LETTER = 2;
+            const SHUFFLE_TIME = 50;
+            
+            const scrambleButtons = document.querySelectorAll('.scramble-button');
+            
+            scrambleButtons.forEach(button => {
+                let intervalId = null;
+                const originalText = button.dataset.targetText;
+                const textElement = button.querySelector('.button-text');
+                
+                function scramble() {
+                    let pos = 0;
+                    
+                    intervalId = setInterval(() => {
+                        const scrambled = originalText.split('')
+                            .map((char, index) => {
+                                if (pos / CYCLES_PER_LETTER > index) {
+                                    return char;
+                                }
+                                
+                                if (char === ' ') return ' ';
+                                
+                                const randomCharIndex = Math.floor(Math.random() * CHARS.length);
+                                const randomChar = CHARS[randomCharIndex];
+                                
+                                return randomChar;
+                            })
+                            .join('');
+                        
+                        textElement.textContent = scrambled;
+                        pos++;
+                        
+                        if (pos >= originalText.length * CYCLES_PER_LETTER) {
+                            stopScramble();
+                        }
+                    }, SHUFFLE_TIME);
+                }
+                
+                function stopScramble() {
+                    clearInterval(intervalId);
+                    textElement.textContent = originalText;
+                }
+                
+                button.addEventListener('mouseenter', scramble);
+                button.addEventListener('mouseleave', stopScramble);
+                button.addEventListener('touchstart', scramble, {passive: true});
+                button.addEventListener('touchend', stopScramble);
+            });
+            
             // Nav links hover effect
             const navLinks = document.querySelectorAll('.nav-links a');
             navLinks.forEach(link => {
@@ -1429,8 +1716,8 @@
                 };
                 
                 const sectionObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
                             entry.target.style.opacity = "1";
                             entry.target.style.transform = "translateY(0)";
                             sectionObserver.unobserve(entry.target);
