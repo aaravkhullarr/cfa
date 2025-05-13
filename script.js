@@ -5,17 +5,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (emailInput && signupBtn) {
         signupBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const email = emailInput.value.trim();
-            
-            if (validateEmail(email)) {
-                // Would normally send this to a backend
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        
+        if (validateEmail(email)) {
+            // Would normally send this to a backend
                 alert('Thank you for signing up! We will be in touch soon.');
-                emailInput.value = '';
-            } else {
-                alert('Please enter a valid email address.');
-            }
-        });
+            emailInput.value = '';
+        } else {
+            alert('Please enter a valid email address.');
+        }
+    });
         
         // Allow form submission on Enter key
         emailInput.addEventListener('keypress', function(e) {
