@@ -70,8 +70,9 @@
             letter-spacing: -0.022em;
             background-color: #070709; /* Dark background */
             background-image: 
-                url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none" stroke="%232DD4BF" stroke-width="0.2" opacity="0.08"/></svg>'),
-                radial-gradient(circle at 50% 0%, rgba(45, 212, 191, 0.03) 0%, rgba(7, 7, 9, 0) 50%);
+                url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none" stroke="%232DD4BF" stroke-width="0.2" opacity="0.05"/></svg>'),
+                radial-gradient(circle at 50% 0%, rgba(45, 212, 191, 0.025) 0%, rgba(7, 7, 9, 0) 70%),
+                radial-gradient(circle at 80% 80%, rgba(45, 212, 191, 0.015) 0%, rgba(7, 7, 9, 0) 40%);
             background-attachment: fixed;
             overflow-x: hidden;
         }
@@ -91,11 +92,79 @@
         /* Make sure buttons all use Avenir */
         .btn-primary, .btn-secondary, .contact-btn, .signup-btn {
             font-family: 'Avenir', sans-serif !important;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 4px;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 140px;
+            text-align: center;
+            overflow: hidden;
+            box-sizing: border-box;
+            height: 45px;
         }
 
-        /* To ensure all text uses Avenir even if added dynamically */
-        .scramble-button, .rating-text, .rating-container {
+        .btn-primary, .signup-btn {
+            color: var(--dark-bg);
+            background: var(--primary-light);
+            border: none;
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.5);
+        }
+
+        .btn-secondary, .contact-btn {
+            color: var(--primary-light);
+            background: transparent;
+            border: 1px solid var(--primary-light);
+        }
+        
+        .contact-btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            min-width: 120px;
+            height: 38px;
+            margin-right: 0;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+            justify-content: center;
+            min-height: 45px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+                min-height: 102px;
+            }
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
             font-family: 'Avenir', sans-serif !important;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        
+        .scramble-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
 
         @keyframes scanline {
@@ -225,10 +294,10 @@
             border-bottom: none;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            max-width: 1200px;
-            width: 90%;
-            height: 64px;
-            padding: 0 60px;
+            max-width: 40%;
+            width: 40%;
+            height: 80px;
+            padding: 0 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -239,7 +308,7 @@
             z-index: 100;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 6px 16px rgba(45, 212, 191, 0.2);
             transition: all 0.3s ease;
-            border-radius: 40px;
+            border-radius: 20px;
             opacity: 1;
             visibility: visible;
             border: 1px solid rgba(45, 212, 191, 0.15);
@@ -290,6 +359,8 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            padding-left: 0;
+            margin-right: 24px;
         }
 
         .nav-logo img {
@@ -308,37 +379,65 @@
             display: flex;
             gap: 16px;
             align-items: center;
-            padding-right: 60px;
+            padding: 0;
+            position: static;
+            left: auto;
+            transform: none;
+            height: 80px;
+            line-height: 80px;
         }
 
         .nav-links a {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 500;
             color: var(--text-light);
             text-decoration: none;
             transition: color 0.2s ease, box-shadow 0.3s ease;
             position: relative;
-            padding: 8px 0;
+            padding: 0 16px;
+            height: 80px;
+            line-height: 80px;
+            display: inline-flex;
+            align-items: center;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: 28px;
+            left: 16px;
             width: 0;
             height: 2px;
             background-color: var(--primary-light);
             transition: width 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .nav-links a:hover::after {
+            width: calc(100% - 32px);
+            box-shadow: 0 0 8px var(--primary-light);
+        }
+        
+        /* Active link styling - remove permanent underline */
+        .nav-links a.active::after {
+            width: 0; /* Changed from calc(100% - 32px) to remove permanent underline */
+            height: 2px;
+            background-color: var(--primary-light);
+            box-shadow: 0 0 8px var(--primary-light);
+        }
+        
+        /* Make active link show underline on hover, matching other links */
+        .nav-links a.active:hover::after {
+            width: calc(100% - 32px);
+        }
+        
+        /* Fix the hover state for nav links */
         .nav-links a:hover {
             color: var(--primary-light);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
-            box-shadow: 0 0 8px var(--primary-light);
+        /* Style the contact button container */
+        .contact-btn-container {
+            margin-left: auto;
         }
 
         .contact-btn {
@@ -380,37 +479,115 @@
             text-align: center;
             max-width: 1200px;
             width: 100%;
+            position: relative;
+            z-index: 2;
         }
-
+        
+        /* Enhanced green glow effect behind the headline */
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: 220%;
+            background: radial-gradient(ellipse at center, rgba(45, 212, 191, 0.25) 0%, rgba(10, 10, 15, 0) 70%);
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(15px);
+        }
+        
+        /* Add a stronger green undertone with a horizontal line */
+        .hero-headline::after {
+            display: none; /* Hide the line under the headline */
+        }
+        
+        /* Enhance the pulse glow animation to emphasize the green undertone */
+        @keyframes pulseGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(45, 212, 191, 0.6), 0 0 40px rgba(45, 212, 191, 0.3), 0 0 80px rgba(45, 212, 191, 0.2);
+            }
+            100% {
+                text-shadow: 0 0 25px rgba(45, 212, 191, 0.8), 0 0 50px rgba(45, 212, 191, 0.5), 0 0 100px rgba(45, 212, 191, 0.3);
+            }
+        }
+        
+        /* Special styling for the hero headline to create even glow effect */
+        .hero-headline span.highlight {
+            color: white; /* All text is white */
+            text-shadow: inherit; /* Inherit the main text shadow */
+            position: relative;
+            display: inline-block;
+            padding-bottom: 2px;
+            /* Remove the subtle green undertone */
+            border-bottom: none;
+        }
+        
         .hero-headline {
+            font-family: 'Avenir', sans-serif !important;
             font-size: 64px;
-            font-weight: 800;
+            font-weight: 900;
             line-height: 1.2;
-            color: var(--text-light);
+            color: white; /* Pure white text */
             margin: 0 0 30px 0;
             text-align: center;
-            text-shadow: 0 0 30px rgba(45, 212, 191, 0.3);
+            text-shadow: 0 0 20px rgba(45, 212, 191, 0.7), 0 0 40px rgba(45, 212, 191, 0.4), 0 0 80px rgba(45, 212, 191, 0.2); /* Layered glow */
             max-width: 1200px;
             width: 100%;
             padding: 0 20px;
             position: relative;
+            z-index: 2;
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
+            animation: pulseGlow 4s infinite alternate;
+            /* Add a subtle text stroke for extra definition */
+            -webkit-text-stroke: 1px rgba(45, 212, 191, 0.15);
+            /* We'll use the ::after element for the green undertone instead of border-bottom */
+            padding-bottom: 10px;
         }
-
-        .hero-headline::before {
-            display: none;
+        
+        @keyframes pulseGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(45, 212, 191, 0.6), 0 0 40px rgba(45, 212, 191, 0.3), 0 0 80px rgba(45, 212, 191, 0.2);
+            }
+            100% {
+                text-shadow: 0 0 25px rgba(45, 212, 191, 0.8), 0 0 50px rgba(45, 212, 191, 0.5), 0 0 100px rgba(45, 212, 191, 0.3);
+            }
         }
-
+        
+        /* Special styling for the hero headline to create even glow effect */
+        .hero-headline span.highlight, 
+        .hero-headline span.highlight-purple {
+            color: white; /* All text is white */
+            text-shadow: inherit; /* Inherit the main text shadow */
+            position: relative;
+        }
+        
+        /* Remove any leftover different styling between the two spans */
+        .hero-headline span.highlight {
+            color: white;
+        }
+        
+        .hero-headline span.highlight-purple {
+            color: white;
+        }
+        
         .hero-subtext {
             font-size: 20px;
             font-weight: 400;
             line-height: 1.6;
-            color: var(--text-muted);
+            color: white;
             max-width: 1100px;
             margin: 0 0 30px 0;
             text-align: center;
             letter-spacing: -0.01em;
             width: 100%;
             padding: 0 20px;
+            text-shadow: 0 0 10px rgba(45, 212, 191, 0.3);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-buttons {
@@ -430,6 +607,14 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 140px;
+            text-align: center;
+            overflow: hidden;
+            box-sizing: border-box;
+            height: 45px;
         }
 
         .btn-primary, .signup-btn {
@@ -527,24 +712,24 @@
             opacity: 1;
         }
 
-        .contact-btn {
-            padding: 8px 18px;
-            font-size: 14px;
-        }
-
         .button-text {
             position: relative;
             z-index: 2;
             display: inline-block;
+            font-family: 'Avenir', sans-serif !important;
             letter-spacing: 0.05em;
+            white-space: nowrap;
+            pointer-events: none;
         }
-
+        
         .scramble-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
-        
+
         /* Remove lock icon styling */
         .lock-icon {
             display: none;
@@ -760,12 +945,17 @@
         }
 
         .feature-title {
+            font-family: 'Avenir', sans-serif !important;
             font-size: 24px;
-            font-weight: 600;
-            color: var(--text-light);
+            font-weight: 700;
+            color: transparent;
             margin: 0;
             display: flex;
             align-items: center;
+            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--secondary-purple) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
         }
 
         /* Style the arrow within the title */
@@ -968,19 +1158,47 @@
             display: none;
         }
 
+        /* Create glowing heading style for all section headings with italics */
         .section-title {
-            font-size: 36px;
-            font-weight: 700;
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 48px;
+            font-weight: 900;
+            font-style: italic; /* Add italics to section headers */
             text-align: center;
-            color: var(--text-light);
-            margin-bottom: 16px;
+            color: white;
+            margin-bottom: 24px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            text-shadow: 0 0 20px rgba(45, 212, 191, 0.7), 0 0 40px rgba(45, 212, 191, 0.4), 0 0 80px rgba(45, 212, 191, 0.2);
+            line-height: 1.2;
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
+            animation: headingGlow 4s infinite alternate;
+            -webkit-text-stroke: 1px rgba(45, 212, 191, 0.15);
+        }
+        
+        @keyframes headingGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(45, 212, 191, 0.6), 0 0 40px rgba(45, 212, 191, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 25px rgba(45, 212, 191, 0.8), 0 0 50px rgba(45, 212, 191, 0.5), 0 0 80px rgba(45, 212, 191, 0.3);
+            }
+        }
+        
+        /* Remove any gradient background from section headings */
+        .section-title:not(.no-gradient) {
+            color: white;
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
         }
 
         .section-subtitle {
             font-size: 18px;
             font-weight: 400;
+            font-style: italic;
             text-align: center;
             color: var(--text-muted);
             margin-bottom: 60px;
@@ -1014,7 +1232,7 @@
                 max-width: 100%;
             }
         }
-
+        
         @media (max-width: 480px) {
             .hero-headline {
                 font-size: 36px;
@@ -1037,6 +1255,7 @@
             padding: 80px 0 40px;
             position: relative;
             overflow: hidden;
+            background: transparent !important; /* Force transparency */
         }
 
         footer::before {
@@ -1084,12 +1303,17 @@
         }
 
         .footer-column h4 {
+            font-family: 'Avenir', sans-serif !important;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 20px;
-            color: var(--primary-light);
+            color: transparent;
             text-transform: uppercase;
             letter-spacing: 1px;
+            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--secondary-purple) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
         }
 
         .footer-column ul {
@@ -1175,11 +1399,15 @@
         }
 
         .signup-title {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 16px;
-            text-shadow: 0 0 10px rgba(45, 212, 191, 0.3);
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 48px;
+            font-weight: 900;
+            color: transparent;
+            margin-bottom: 24px;
+            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--secondary-purple) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
         }
 
         .signup-subtitle {
@@ -1260,7 +1488,7 @@
             position: relative;
             overflow: hidden;
             margin-top: -40px;
-            background: radial-gradient(circle at center, #11111A 0%, #0A0A0F 80%);
+            background: transparent !important; /* Force transparency */
         }
 
         .offerings-section .section-header {
@@ -1270,17 +1498,7 @@
         }
 
         .offerings-section .section-title {
-            font-size: 48px;
-            font-weight: 900;
-            text-align: center;
-            color: transparent;
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 2;
-            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--secondary-purple) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            /* No need for duplicate styles since they're in the common section-title class now */
         }
 
         .offerings-section .highlighter {
@@ -1397,13 +1615,18 @@
 
         /* Ensure consistent title styling */
         .offering-title {
+            font-family: 'Avenir', sans-serif !important;
             font-size: 24px;
             font-weight: 700;
-            color: var(--text-light);
+            color: transparent;
             margin: 0 0 12px 0;
             line-height: 1.3;
             padding: 0;
             text-align: left;
+            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--secondary-purple) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
         }
 
         /* Ensure consistent description styling */
@@ -1459,11 +1682,896 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(45, 212, 191, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(45, 212, 191, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45, 212, 191, 0.025) 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
-            z-index: -1;
+            z-index: -2;
+        }
+        
+        /* Make the vignette more subtle for less obvious tone differences */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(45, 212, 191, 0.005) 0%,
+                rgba(7, 7, 9, 0.4) 100%
+            );
+            background-size: 200% 200%;
+            background-position: center;
+            pointer-events: none;
+            z-index: -3;
+            mix-blend-mode: multiply;
+        }
+
+        /* Features Mosaic Grid Styling */
+        .features-mosaic {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr); /* Changed to 5 rows to accommodate all 10 items */
+            gap: 24px;
+            width: 960px;
+            height: 1140px; /* Adjusted for 5 rows instead of 4 */
+            margin: 60px auto;
+            position: relative;
+        }
+        
+        .mosaic-card {
+            background: rgba(7, 7, 9, 0.85);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(45, 212, 191, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        
+        .mosaic-card.small-card {
+            height: 100%;
+        }
+        
+        .mosaic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(45, 212, 191, 0.2);
+            border-color: rgba(45, 212, 191, 0.3);
+        }
+        
+        .mosaic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-light), transparent);
+            opacity: 0.3;
+        }
+        
+        .card-content {
+            padding: 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+        
+        .bento-title {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin: 0 0 16px 0;
+            line-height: 1.3;
+        }
+        
+        .bento-image {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(7, 7, 9, 0.5);
+            position: relative;
+        }
+        
+        .bento-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            opacity: 0.9;
+        }
+        
+        .mosaic-card:hover .bento-image img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+        
+        /* Add an overlay gradient to ensure text readability */
+        .bento-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(7, 7, 9, 0.2), rgba(7, 7, 9, 0.6));
+            pointer-events: none;
+        }
+        
+        /* Remove the placeholder styling since we're using real images now */
+        .bento-image-placeholder {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .features-mosaic {
+                width: 90%;
+                height: auto;
+                aspect-ratio: 5 / 6; /* Adjusted for the 5:6 ratio of the mosaic */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .features-mosaic {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                height: auto;
+                width: 100%;
+                max-width: 600px;
+            }
+            
+            .mosaic-card {
+                height: 200px;
+            }
+        }
+
+        /* Partners title - remove gradient */
+        .section-title.no-gradient {
+            color: var(--text-light); /* Use solid color instead of gradient */
+            background: none;
+            -webkit-background-clip: initial;
+            background-clip: initial;
+            text-shadow: 0 0 30px rgba(45, 212, 191, 0.3); /* Keep subtle glow */
+        }
+        
+        /* Keep all other section titles with gradient */
+        .section-title:not(.no-gradient) {
+            /* Gradient styles remain unchanged for these */
+        }
+
+        /* Update image styling for the bento grid */
+        .bento-image {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+            margin-top: 8px; /* Small space after the title */
+        }
+        
+        .bento-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .mosaic-card:hover .bento-image img {
+            transform: scale(1.05);
+        }
+        
+        /* Adjust card content to properly position title and image */
+        .card-content {
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+        
+        /* Ensure the title takes minimal space, letting image fill the rest */
+        .bento-title {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin: 0 0 12px 0;
+            line-height: 1.3;
+            flex-shrink: 0; /* Don't let the title shrink */
+        }
+        
+        /* Override any alt text display issues */
+        .bento-image img[alt] {
+            color: transparent; /* Hide alt text if image fails to load */
+            font-size: 0;
+        }
+        
+        /* Remove any additional styling that might interfere */
+        .bento-image::after {
+            display: none;
+        }
+
+        /* Contact Sales Button Section Styling */
+        .contact-section {
+            padding: 60px 0 80px;
+            text-align: center;
+            background: transparent !important; /* Force transparency */
+        }
+        
+        .contact-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .contact-btn-large {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-light);
+            background: transparent;
+            border: 2px solid var(--primary-light);
+            border-radius: 30px;
+            padding: 16px 36px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 220px;
+            height: auto;
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-btn-large:hover {
+            background: rgba(45, 212, 191, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.5);
+        }
+        
+        .contact-btn-large:active {
+            transform: translateY(1px);
+        }
+        
+        .contact-btn-large::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+            animation: borderFlow 2s linear infinite;
+        }
+        
+        @keyframes borderFlow {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .nav-container {
+                width: 60%;
+                max-width: 60%;
+            }
+            
+            .nav-links a {
+                padding: 0 12px;
+                font-size: 18px;
+            }
+            
+            .nav-links a::after {
+                left: 12px;
+            }
+            
+            .nav-links a:hover::after,
+            .nav-links a.active::after {
+                width: calc(100% - 24px);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .nav-container {
+                width: 70%;
+                max-width: 70%;
+            }
+            
+            .nav-links a {
+                padding: 0 8px;
+                font-size: 16px;
+            }
+            
+            .nav-links a::after {
+                left: 8px;
+            }
+            
+            .nav-links a:hover::after,
+            .nav-links a.active::after {
+                width: calc(100% - 16px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                width: 90%;
+                max-width: 90%;
+                padding: 0 20px;
+                height: 70px;
+            }
+            
+            .nav-links {
+                position: static;
+                transform: none;
+                gap: 8px;
+                height: 70px;
+                line-height: 70px;
+            }
+            
+            .nav-links a {
+                font-size: 16px;
+                padding: 0 8px;
+                height: 70px;
+                line-height: 70px;
+            }
+            
+            .nav-links a::after {
+                bottom: 24px;
+            }
+        }
+        
+        @media (max-width: 580px) {
+            .nav-container {
+                padding: 0 10px;
+                height: 60px;
+            }
+            
+            .nav-logo span {
+                display: none;
+            }
+            
+            .nav-links {
+                height: 60px;
+                line-height: 60px;
+            }
+            
+            .nav-links a {
+                padding: 0 6px;
+                font-size: 14px;
+                height: 60px;
+                line-height: 60px;
+            }
+            
+            .nav-links a::after {
+                bottom: 20px;
+            }
+            
+            .contact-btn {
+                min-width: 100px;
+                padding: 6px 12px;
+                font-size: 12px;
+                height: 32px;
+            }
+        }
+
+        /* Styling for Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .benefit-item {
+            background: rgba(7, 7, 9, 0.85);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(45, 212, 191, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(45, 212, 191, 0.2);
+            border-color: rgba(45, 212, 191, 0.3);
+        }
+        
+        .benefit-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-title {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 22px;
+            font-weight: 700;
+            color: transparent;
+            margin: 0 0 15px 0;
+            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--secondary-purple) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+        }
+        
+        .benefit-description {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        /* How It Works section styling */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            position: relative;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 7%;
+            width: 86%;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(45, 212, 191, 0.3), rgba(167, 139, 250, 0.3));
+            z-index: 0;
+        }
+        
+        .step-item {
+            flex: 0 0 18%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.5);
+        }
+        
+        .step-title {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin: 0 0 10px 0;
+        }
+        
+        .step-description {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        
+        /* Responsive styles for the new sections */
+        @media (max-width: 992px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .steps-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .steps-container::before {
+                display: none;
+            }
+            
+            .step-item {
+                flex: 0 0 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Style for the italicized text in the headline */
+        .hero-headline em {
+            font-style: italic;
+            font-weight: 800;
+            color: white;
+            position: relative;
+            text-shadow: 0 0 25px rgba(45, 212, 191, 0.9), 0 0 50px rgba(45, 212, 191, 0.6);
+        }
+
+        /* Adjust card and UI element backgrounds for more grid visibility */
+        .mosaic-card,
+        .offering-card,
+        .benefit-item,
+        .feature-card,
+        .nav-container,
+        .email-signup-container {
+            background-color: rgba(7, 7, 9, 0.8) !important;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        /* Enhanced smooth scrolling with easing */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Smooth scroll animation for all sections */
+        .smooth-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .smooth-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Italicize section subtitles */
+        .section-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            font-style: italic;
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* FAQ Section Styling */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: rgba(7, 7, 9, 0.8);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(45, 212, 191, 0.15);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(45, 212, 191, 0.3);
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.1);
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .faq-question h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin: 0;
+            flex: 1;
+        }
+        
+        .faq-toggle {
+            color: var(--primary-light);
+            font-size: 24px;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .faq-answer {
+            background: rgba(45, 212, 191, 0.03);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer p {
+            padding: 0 24px 20px;
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        /* Additional fonts - replacing Gilroy with Avenir since we're already using Avenir */
+        .section-title {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 48px;
+            font-weight: 900;
+            text-align: center;
+            color: transparent;
+            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--secondary-purple) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            line-height: 1.2;
+            margin: 0 0 24px 0;
+            padding: 120px 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-subtitle {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 18px;
+            font-weight: 400;
+            font-style: italic;
+            text-align: center;
+            color: #CBD5E0;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+            max-width: 600px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Updated How It Works section styling */
+        .how-it-works {
+            text-align: center;
+            margin-top: 120px;
+            margin-bottom: 120px;
+        }
+        
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 60px auto;
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+        
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 32px;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: var(--primary-light);
+            z-index: 0;
+        }
+        
+        .step-item {
+            flex: 0 0 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-number {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-light) 0%, var(--secondary-purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.5);
+        }
+        
+        .step-title {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin: 0 0 12px 0;
+        }
+        
+        .step-description {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0 8px;
+        }
+        
+        /* FAQ Section Styling */
+        .faq-section {
+            margin-top: 120px;
+            margin-bottom: 120px;
+            text-align: center;
+        }
+        
+        .faq-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 60px auto 0;
+            padding: 0 20px;
+        }
+        
+        .faq-item {
+            background: rgba(7, 7, 9, 0.8);
+            border-radius: 12px;
+            border: 2px solid var(--primary-light);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(45, 212, 191, 0.2);
+        }
+        
+        .faq-question {
+            padding: 24px;
+            cursor: pointer;
+            position: relative;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        
+        .faq-question h4 {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin: 0;
+            padding-right: 24px;
+            text-align: left;
+        }
+        
+        .faq-toggle {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            color: var(--primary-light);
+            font-size: 24px;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-answer p {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 24px 24px;
+        }
+        
+        @media (max-width: 992px) {
+            .faq-container {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .steps-container {
+                flex-direction: column;
+                gap: 40px;
+                align-items: center;
+            }
+            
+            .steps-container::before {
+                width: 4px;
+                height: 80%;
+                left: 50%;
+                top: 10%;
+                transform: translateX(-50%);
+            }
+            
+            .step-item {
+                flex: 0 0 100%;
+                width: 100%;
+                max-width: 320px;
+            }
+            
+            .faq-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .section-title {
+                padding: 80px 0 24px;
+                font-size: 36px;
+            }
         }
     </style>
     
@@ -1476,6 +2584,32 @@
             allTextElements.forEach(element => {
                 element.style.fontFamily = 'Avenir, sans-serif';
             });
+            
+            // Create a MutationObserver to watch for any new elements added to the DOM
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+                        // Check all added nodes and apply Avenir font
+                        mutation.addedNodes.forEach((node) => {
+                            if (node.nodeType === 1) { // Element node
+                                node.style.fontFamily = 'Avenir, sans-serif';
+                                
+                                // Also apply to all children of the new node
+                                const childElements = node.querySelectorAll('*');
+                                childElements.forEach((child) => {
+                                    child.style.fontFamily = 'Avenir, sans-serif';
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Start observing the entire document for changes
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
         });
     </script>
 </head>
@@ -1487,12 +2621,10 @@
                 <span>Chatflow Automations</span>
             </div>
             <div class="nav-links">
-                <a href="#">About Us</a>
-                <a href="#">Features</a>
-                <a href="#">Services</a>
-                <a href="#">Analytics</a>
-                <a href="#">Pricing</a>
-                <a href="#">Help Center</a>
+                <a href="#" class="active">Our Offerings</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="contact-btn-container">
                 <button class="contact-btn scramble-button" data-target-text="Contact Sales">
                     <span class="button-text">Contact Sales</span>
                 </button>
@@ -1501,12 +2633,12 @@
 
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-headline" style="animation: fadeInUp 0.8s ease forwards;">40% of your workweek is eaten<br>by repetitive tasks</h1>
+                <h1 class="hero-headline" style="animation: fadeInUp 0.8s ease forwards;">
+                    <span class="highlight">40% of <em>your workweek</em> is eaten</span><br>
+                    <span class="highlight">by repetitive tasks</span>
+                </h1>
                 <p class="hero-subtext" style="animation: fadeInUp 0.8s ease forwards 0.2s; opacity: 0;">We design, implement, and manage AI-driven solutions for your frontend & backend<br>—so you can focus on growth while we handle the busy work.</p>
                 <div class="hero-buttons" style="animation: fadeInUp 0.8s ease forwards 0.4s; opacity: 0;">
-                    <button class="btn-primary scramble-button" data-target-text="Get Started">
-                        <span class="button-text">Get Started</span>
-                    </button>
                     <button class="btn-secondary scramble-button" data-target-text="Schedule a Demo">
                         <span class="button-text">Schedule a Demo</span>
                     </button>
@@ -1520,53 +2652,6 @@
                         <span class="star">★</span>
                     </div>
                     <span class="rating-text">Trusted by 10+ companies</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="partners-section">
-        <div class="container">
-            <h2 class="partners-title">Trusted by Businesses, Nonprofits, Agencies, and Schools</h2>
-            <div class="partners-wrapper">
-                <div class="logo-carousel">
-                    <div class="logo-slide">
-                        <img src="qt=q_95.webp" alt="QT">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="bizbuzznfp_logo.jpeg" alt="BizBuzzNFP">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="HE logo1.png" alt="HE">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="Teemate 3.png" alt="Teemate">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="templace.png" alt="Templace">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="prilo.png" alt="Prilo">
-                    </div>
-                    <!-- Duplicate for seamless scrolling -->
-                    <div class="logo-slide">
-                        <img src="qt=q_95.webp" alt="QT">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="bizbuzznfp_logo.jpeg" alt="BizBuzzNFP">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="HE logo1.png" alt="HE">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="Teemate 3.png" alt="Teemate">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="templace.png" alt="Templace">
-                    </div>
-                    <div class="logo-slide">
-                        <img src="prilo.png" alt="Prilo">
-                    </div>
                 </div>
             </div>
         </div>
@@ -1610,87 +2695,116 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="features-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">An end-to-end solution for repetitive tasks</h2>
-            </div>
             
-            <div class="features-container">
-                <div class="feature-card">
-                    <div class="feature-header">
-                        <h3 class="feature-title">Growth</h3>
+            <!-- New section: Features and Benefits -->
+            <div class="features-benefits-section" style="margin-top: 80px;">
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⚡</div>
+                        <h3 class="benefit-title">Boost Productivity</h3>
+                        <p class="benefit-description">Reclaim up to 40% of your workweek by automating repetitive tasks, allowing your team to focus on high-value work.</p>
                     </div>
-                    <p class="feature-description">Generate more pipeline in a fraction of the time</p>
-                    
-                    <div class="feature-stat">
-                        <div class="feature-stat-title">Pipeline generated</div>
-                        <div class="feature-stat-value">$15M</div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💰</div>
+                        <h3 class="benefit-title">Reduce Costs</h3>
+                        <p class="benefit-description">Cut operational expenses by up to 30% through streamlined processes and reduced manual intervention.</p>
                     </div>
-                    
-                    <div class="feature-graphic">
-                        <div class="bar-chart">
-                            <div class="chart-bar"></div>
-                            <div class="chart-bar"></div>
-                            <div class="chart-bar"></div>
-                            <div class="chart-bar"></div>
-                            <div class="chart-bar"></div>
-                            <div class="chart-bar"></div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🔄</div>
+                        <h3 class="benefit-title">Seamless Integration</h3>
+                        <p class="benefit-description">Easily connect with your existing tools and systems with our flexible API-first approach.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📈</div>
+                        <h3 class="benefit-title">Scale With Confidence</h3>
+                        <p class="benefit-description">Our solutions grow with your business, ensuring consistent performance even as demands increase.</p>
+                    </div>
+                </div>
+                
+                <div class="how-it-works">
+                    <h2 class="section-title">How It Works</h2>
+                    <p class="section-subtitle">Our streamlined process ensures a smooth implementation of automation solutions for your business</p>
+                    <div class="steps-container">
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <h4 class="step-title">Consultation</h4>
+                            <p class="step-description">Book a demo where we analyze your current workflows and identify automation opportunities.</p>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <h4 class="step-title">Custom Design</h4>
+                            <p class="step-description">Our experts create tailored solutions aligned with your specific needs.</p>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <h4 class="step-title">Feedback Call</h4>
+                            <p class="step-description">You provide feedback on our design and training to ensure it meets your requirements.</p>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <h4 class="step-title">Implementation</h4>
+                            <p class="step-description">We seamlessly integrate our AI solutions into your existing systems.</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-header">
-                        <h3 class="feature-title">Marketing</h3>
-                    </div>
-                    <p class="feature-description">Turn automated outbound into your best demand gen channel</p>
-                    
-                    <div class="feature-stat">
-                        <div class="feature-stat-title">Channel distribution</div>
-                    </div>
-                    
-                    <div class="feature-graphic">
-                        <div class="new-donut-chart"></div>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-header">
-                        <h3 class="feature-title">RevOps</h3>
-                    </div>
-                    <p class="feature-description">Be the reason your revenue team beats pipeline goals</p>
-                    
-                    <div class="feature-stat">
-                        <div class="feature-stat-title">Performance tracking</div>
-                    </div>
-                    
-                    <div class="feature-graphic">
-                        <div class="line-chart"></div>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-header">
-                        <h3 class="feature-title">Sales</h3>
-                    </div>
-                    <p class="feature-description">Put prospecting and account research on autopilot</p>
-                    
-                    <div class="feature-stat">
-                        <div class="feature-stat-title">Qualification process</div>
-                    </div>
-                    
-                    <div class="feature-graphic">
-                        <div class="new-flow-chart">
-                            <div class="flow-step">
-                                <div class="flow-circle qualified">Qualified</div>
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-subtitle">Get answers to common questions about our automation services</p>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>How quickly can you implement automation solutions?</h4>
+                                <div class="faq-toggle">+</div>
                             </div>
-                            <div class="flow-arrow">→</div>
-                            <div class="flow-step">
-                                <div class="flow-circle prospect">Prospect</div>
+                            <div class="faq-answer">
+                                <p>Most implementations take 2-4 weeks from initial consultation to full deployment, depending on complexity. Simple automations can be live in as little as one week.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>What types of processes can you automate?</h4>
+                                <div class="faq-toggle">+</div>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We specialize in automating repetitive tasks in customer service, data entry, document processing, lead qualification, appointment scheduling, and many other routine operations across various business functions.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Do I need technical expertise to use your solutions?</h4>
+                                <div class="faq-toggle">+</div>
+                            </div>
+                            <div class="faq-answer">
+                                <p>No technical expertise is required. Our solutions are designed to be user-friendly and our team handles all technical aspects of implementation and maintenance.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>How much can I expect to save with your automation solutions?</h4>
+                                <div class="faq-toggle">+</div>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Clients typically see 30-60% cost reduction in automated processes, with ROI often achieved within 3-6 months of implementation.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>What ongoing support do you provide after implementation?</h4>
+                                <div class="faq-toggle">+</div>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We provide comprehensive support including monitoring, maintenance, regular performance reviews, and continuous optimization to ensure your automation solutions adapt to changing business needs.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Can your solutions integrate with our existing software?</h4>
+                                <div class="faq-toggle">+</div>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, our automation solutions are designed to integrate seamlessly with most popular business software and platforms. We use APIs and custom connectors to ensure smooth data flow between systems.</p>
                             </div>
                         </div>
                     </div>
@@ -1699,18 +2813,13 @@
         </div>
     </section>
 
-    <section class="email-signup-section">
+    <!-- Contact Sales Button Section -->
+    <section class="contact-section">
         <div class="container">
-            <div class="email-signup-container">
-                <h2 class="signup-title">Ready to Start?</h2>
-                <p class="signup-subtitle">Join us today and transform the way your business handles repetitive tasks.</p>
-                <div class="email-form">
-                    <input type="email" class="email-input" placeholder="Enter your email address">
-                    <button class="signup-btn scramble-button" data-target-text="Get Started">
-                        <span class="button-text">Get Started</span>
-                    </button>
-                </div>
-                <p class="privacy-note">We respect your privacy. No spam ever.</p>
+            <div class="contact-button-container">
+                <button class="contact-btn-large scramble-button" data-target-text="Contact Sales">
+                    <span class="button-text">Contact Sales</span>
+                </button>
             </div>
         </div>
     </section>
@@ -1722,23 +2831,11 @@
                     <img src="IMG_3873.jpeg" alt="Chatflow Automations" class="footer-logo-img">
                     <span>Chatflow Automations</span>
                 </div>
+                <div style="margin-left: 10px; margin-top: 15px; color: var(--text-muted);">
+                    <p style="margin: 5px 0; font-size: 14px;">Phone: 331-814-9954</p>
+                    <p style="margin: 5px 0; font-size: 14px;">Email: aaravkhullarr@gmail.com</p>
+                </div>
                 <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Solutions</h4>
-                        <ul>
-                            <li><a href="#">AI Chatbots</a></li>
-                            <li><a href="#">Process Automation</a></li>
-                            <li><a href="#">Data Analytics</a></li>
-                        </ul>
-                    </div>
                     <div class="footer-column">
                         <h4>Legal</h4>
                         <ul>
@@ -1770,8 +2867,15 @@
                 const originalText = button.dataset.targetText;
                 const textElement = button.querySelector('.button-text');
                 
+                // Store original width to prevent layout shifts
+                const originalTextWidth = textElement.offsetWidth;
+                
                 function scramble() {
                     let pos = 0;
+                    
+                    // Ensure the button container maintains its width
+                    const buttonWidth = button.offsetWidth;
+                    button.style.width = buttonWidth + 'px';
                     
                     intervalId = setInterval(() => {
                         const scrambled = originalText.split('')
@@ -1801,6 +2905,10 @@
                 function stopScramble() {
                     clearInterval(intervalId);
                     textElement.textContent = originalText;
+                    // Remove explicit width setting after animation
+                    setTimeout(() => {
+                        button.style.width = '';
+                    }, 100);
                 }
                 
                 button.addEventListener('mouseenter', scramble);
@@ -1830,31 +2938,34 @@
                 }
             });
             
-            // Add scroll animations to sections
+            // Add smooth scrolling animations to sections
             function setupScrollAnimations() {
+                // Add smooth-section class to all major sections
                 const sections = document.querySelectorAll('section');
+                sections.forEach(section => {
+                    if (!section.classList.contains('hero-section')) {
+                        section.classList.add('smooth-section');
+                    }
+                });
+                
+                // Set up the intersection observer
                 const options = {
-                    threshold: 0.25,
+                    threshold: 0.15,
                     rootMargin: "0px 0px -100px 0px"
                 };
                 
                 const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                            entry.target.style.opacity = "1";
-                            entry.target.style.transform = "translateY(0)";
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
                             sectionObserver.unobserve(entry.target);
                         }
                     });
                 }, options);
                 
-                sections.forEach((section, index) => {
-                    if (!section.classList.contains('hero-section')) {
-                        section.style.opacity = "0";
-                        section.style.transform = "translateY(30px)";
-                        section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-                        sectionObserver.observe(section);
-                    }
+                // Observe all smooth-section elements
+                document.querySelectorAll('.smooth-section').forEach(section => {
+                    sectionObserver.observe(section);
                 });
                 
                 // Special animations for the offerings section
@@ -1881,9 +2992,58 @@
                 if (offeringsSection) {
                     offeringsObserver.observe(offeringsSection);
                 }
+                
+                // Observe How It Works and FAQ sections for animations too
+                const howItWorksSection = document.querySelector('.how-it-works');
+                const faqSection = document.querySelector('.faq-section');
+                
+                if (howItWorksSection) {
+                    offeringsObserver.observe(howItWorksSection);
+                }
+                
+                if (faqSection) {
+                    offeringsObserver.observe(faqSection);
+                }
             }
             
             setupScrollAnimations();
+            
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                // Initialize the accordion - all closed
+                answer.style.maxHeight = '0';
+                answer.style.padding = '0 24px';
+                
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                            const otherAnswer = otherItem.querySelector('.faq-answer');
+                            otherAnswer.style.maxHeight = '0';
+                            otherAnswer.style.padding = '0 24px';
+                        }
+                    });
+                    
+                    // Toggle current item
+                    if (isActive) {
+                        item.classList.remove('active');
+                        answer.style.maxHeight = '0';
+                        answer.style.padding = '0 24px';
+                    } else {
+                        item.classList.add('active');
+                        answer.style.padding = '24px 24px';
+                        answer.style.maxHeight = answer.scrollHeight + 48 + 'px'; // Add padding to height
+                    }
+                });
+            });
         });
     </script>
 </body>
