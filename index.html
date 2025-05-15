@@ -294,10 +294,10 @@
             border-bottom: none;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            max-width: 45%; /* Reduced from 55% to 45% */
-            width: 45%; /* Reduced from 55% to 45% */
+            max-width: 55%; /* Increased from 45% to 55% */
+            width: 55%; /* Increased from 45% to 55% */
             height: 80px;
-            padding: 0 20px;
+            padding: 0 25px; /* Increased from 20px for better padding */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -386,7 +386,7 @@
             display: flex;
             justify-content: center; /* Center the navigation links */
             flex: 1; /* Take up available space */
-            gap: 0; /* Remove gap to control with padding */
+            gap: 5px; /* Added small gap between links */
             align-items: center;
             padding: 0;
             position: static;
@@ -404,7 +404,7 @@
             text-decoration: none;
             transition: color 0.2s ease, box-shadow 0.3s ease;
             position: relative;
-            padding: 0 15px;
+            padding: 0 12px; /* Reduced from 15px */
             height: 80px;
             line-height: 80px;
             display: inline-flex;
@@ -418,7 +418,7 @@
             content: '';
             position: absolute;
             bottom: 28px;
-            left: 15px; /* Match left padding */
+            left: 12px; /* Match left padding */
             width: 0;
             height: 2px;
             background-color: var(--primary-light);
@@ -426,17 +426,17 @@
         }
 
         .nav-links a:hover::after {
-            width: calc(100% - 30px); /* Adjust based on left and right padding */
+            width: calc(100% - 24px); /* Adjust based on left and right padding */
             box-shadow: 0 0 8px var(--primary-light);
         }
 
         .nav-links a.active:hover::after {
-            width: calc(100% - 30px); /* Adjust based on left and right padding */
+            width: calc(100% - 24px); /* Adjust based on left and right padding */
         }
         
         /* Active link styling */
         .nav-links a.active::after {
-            width: 0;
+            width: calc(100% - 24px); /* Updated to match hover state */
             height: 2px;
             background-color: var(--primary-light);
             box-shadow: 0 0 8px var(--primary-light);
@@ -450,19 +450,20 @@
         /* Style the contact button container */
         .contact-btn-container {
             flex: 0 0 auto;
-            margin-left: 10px; /* Reduced from 15px */
+            margin-left: 15px; /* Increased from 10px for better spacing */
         }
 
         .contact-btn {
-            font-size: 16px;
+            font-size: 15px; /* Adjusted from 16px */
             font-weight: 500;
             color: var(--primary-light);
             background: transparent;
             border: 2px solid var(--primary-light);
             border-radius: 30px;
-            padding: 10px 24px;
+            padding: 8px 20px; /* Adjusted from 10px 24px */
             cursor: pointer;
             transition: all 0.2s ease;
+            min-width: 130px; /* Added minimum width */
         }
 
         .contact-btn:hover {
