@@ -294,10 +294,10 @@
             border-bottom: none;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            max-width: 40%;
-            width: 40%;
+            max-width: 45%; /* Reduced from 55% to 45% */
+            width: 45%; /* Reduced from 55% to 45% */
             height: 80px;
-            padding: 0 30px;
+            padding: 0 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -312,6 +312,12 @@
             opacity: 1;
             visibility: visible;
             border: 1px solid rgba(45, 212, 191, 0.15);
+        }
+        
+        /* Distribute space evenly with a flex layout */
+        .nav-container {
+            display: flex;
+            align-items: center; 
         }
         
         /* Add top glow effect */
@@ -358,11 +364,12 @@
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 6px; /* Reduced from 8px */
             padding-left: 0;
-            margin-right: 24px;
+            flex: 0 0 auto;
+            margin-right: 10px; /* Reduced from 15px */
         }
-
+        
         .nav-logo img {
             height: 32px;
             width: 32px;
@@ -377,7 +384,9 @@
         
         .nav-links {
             display: flex;
-            gap: 16px;
+            justify-content: center; /* Center the navigation links */
+            flex: 1; /* Take up available space */
+            gap: 0; /* Remove gap to control with padding */
             align-items: center;
             padding: 0;
             position: static;
@@ -388,24 +397,28 @@
         }
 
         .nav-links a {
-            font-size: 20px;
-            font-weight: 500;
+            font-family: 'Avenir', sans-serif !important; /* Ensure Avenir font */
+            font-size: 15px;
+            font-weight: 700; /* Changed from 500 to 700 for bold text */
             color: var(--text-light);
             text-decoration: none;
             transition: color 0.2s ease, box-shadow 0.3s ease;
             position: relative;
-            padding: 0 16px;
+            padding: 0 15px;
             height: 80px;
             line-height: 80px;
             display: inline-flex;
             align-items: center;
+            white-space: nowrap;
+            letter-spacing: 0.02em; /* Add slight letter spacing for better readability with bold text */
         }
 
+        /* Adjust link hover effect to match new padding */
         .nav-links a::after {
             content: '';
             position: absolute;
             bottom: 28px;
-            left: 16px;
+            left: 15px; /* Match left padding */
             width: 0;
             height: 2px;
             background-color: var(--primary-light);
@@ -413,31 +426,31 @@
         }
 
         .nav-links a:hover::after {
-            width: calc(100% - 32px);
+            width: calc(100% - 30px); /* Adjust based on left and right padding */
             box-shadow: 0 0 8px var(--primary-light);
         }
+
+        .nav-links a.active:hover::after {
+            width: calc(100% - 30px); /* Adjust based on left and right padding */
+        }
         
-        /* Active link styling - remove permanent underline */
+        /* Active link styling */
         .nav-links a.active::after {
-            width: 0; /* Changed from calc(100% - 32px) to remove permanent underline */
+            width: 0;
             height: 2px;
             background-color: var(--primary-light);
             box-shadow: 0 0 8px var(--primary-light);
         }
         
         /* Make active link show underline on hover, matching other links */
-        .nav-links a.active:hover::after {
-            width: calc(100% - 32px);
-        }
-        
-        /* Fix the hover state for nav links */
         .nav-links a:hover {
             color: var(--primary-light);
         }
 
         /* Style the contact button container */
         .contact-btn-container {
-            margin-left: auto;
+            flex: 0 0 auto;
+            margin-left: 10px; /* Reduced from 15px */
         }
 
         .contact-btn {
@@ -1231,6 +1244,41 @@
                 flex: 0 0 100%;
                 max-width: 100%;
             }
+            
+            /* Responsive spacing adjustments */
+            .section-divider {
+                margin: 40px auto;
+            }
+            
+            .features-benefits-section {
+                margin-top: 60px;
+            }
+            
+            .how-it-works {
+                margin-top: 60px;
+                padding-bottom: 20px;
+            }
+            
+            .faq-section {
+                margin-top: 60px;
+                margin-bottom: 60px;
+            }
+            
+            .steps-container {
+                margin: 40px auto;
+            }
+            
+            .benefits-section-title {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .section-subtitle {
+                margin-bottom: 30px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1643,7 +1691,7 @@
         @media (max-width: 1280px) {
             .offerings-container {
                 max-width: 100%;
-                padding: 0 40px;
+            padding: 0 40px;
             }
         }
         
@@ -1825,7 +1873,7 @@
         
         @media (max-width: 768px) {
             .features-mosaic {
-                display: flex;
+            display: flex;
                 flex-direction: column;
                 gap: 16px;
                 height: auto;
@@ -2080,12 +2128,16 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
             margin-top: 40px;
+            max-width: 80%; /* Reduce width from 90% to 80% */
+            width: 1000px; /* Reduce from 1100px to 1000px */
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .benefit-item {
             background: rgba(7, 7, 9, 0.85);
             border-radius: 16px;
-            padding: 30px;
+            padding: 40px 25px; /* Increase vertical padding from 35px to 40px */
             transition: all 0.3s ease;
             border: 1px solid rgba(45, 212, 191, 0.15);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -2095,17 +2147,13 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-        }
-        
-        .benefit-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(45, 212, 191, 0.2);
-            border-color: rgba(45, 212, 191, 0.3);
+            height: 100%;
+            min-height: 320px; /* Increase minimum height from 280px to 320px */
         }
         
         .benefit-icon {
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 40px; /* Make icon larger */
+            margin-bottom: 25px; /* Increase spacing below icon */
         }
         
         .benefit-title {
@@ -2113,7 +2161,7 @@
             font-size: 22px;
             font-weight: 700;
             color: transparent;
-            margin: 0 0 15px 0;
+            margin: 0 0 20px 0; /* Increased spacing below title */
             background: linear-gradient(to bottom, var(--primary-light) 0%, var(--secondary-purple) 100%);
             -webkit-background-clip: text;
             background-clip: text;
@@ -2123,293 +2171,63 @@
         .benefit-description {
             font-size: 16px;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.6;
             margin: 0;
-        }
-        
-        /* How It Works section styling */
-        .steps-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            position: relative;
-            width: 100%;
-            padding: 0 20px;
-        }
-        
-        .steps-container::before {
-            content: '';
-            position: absolute;
-            top: 30px;
-            left: 7%;
-            width: 86%;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(45, 212, 191, 0.3), rgba(167, 139, 250, 0.3));
-            z-index: 0;
-        }
-        
-        .step-item {
-            flex: 0 0 18%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .step-number {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-purple) 100%);
+            height: 100%; /* Allow description to take available space */
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--dark-bg);
-            margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(45, 212, 191, 0.5);
         }
         
-        .step-title {
-            font-family: 'Avenir', sans-serif !important;
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-light);
-            margin: 0 0 10px 0;
-        }
-        
-        .step-description {
-            font-size: 16px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-        
-        /* Responsive styles for the new sections */
-        @media (max-width: 992px) {
+        /* Adjust responsiveness */
+        @media (max-width: 1200px) {
             .benefits-grid {
+                width: 90%;
                 grid-template-columns: repeat(2, 1fr);
             }
         }
         
-        @media (max-width: 768px) {
-            .steps-container {
-                flex-direction: column;
-                gap: 40px;
-            }
-            
-            .steps-container::before {
-                display: none;
-            }
-            
-            .step-item {
-                flex: 0 0 100%;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Style for the italicized text in the headline */
-        .hero-headline em {
-            font-style: italic;
-            font-weight: 800;
-            color: white;
-            position: relative;
-            text-shadow: 0 0 25px rgba(45, 212, 191, 0.9), 0 0 50px rgba(45, 212, 191, 0.6);
-        }
-
-        /* Adjust card and UI element backgrounds for more grid visibility */
-        .mosaic-card,
-        .offering-card,
-        .benefit-item,
-        .feature-card,
-        .nav-container,
-        .email-signup-container {
-            background-color: rgba(7, 7, 9, 0.8) !important;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-        }
-
-        /* Enhanced smooth scrolling with easing */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Smooth scroll animation for all sections */
-        .smooth-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        
-        .smooth-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Italicize section subtitles */
-        .section-subtitle {
-            font-size: 18px;
-            font-weight: 400;
-            font-style: italic;
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 60px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* FAQ Section Styling */
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .faq-item {
-            background: rgba(7, 7, 9, 0.8);
-            border-radius: 8px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(45, 212, 191, 0.15);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .faq-item:hover {
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(45, 212, 191, 0.2);
             border-color: rgba(45, 212, 191, 0.3);
-            box-shadow: 0 0 15px rgba(45, 212, 191, 0.1);
         }
         
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 24px;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .faq-question h4 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-light);
-            margin: 0;
-            flex: 1;
-        }
-        
-        .faq-toggle {
-            color: var(--primary-light);
-            font-size: 24px;
-            font-weight: 300;
-            transition: all 0.3s ease;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .faq-answer {
-            background: rgba(45, 212, 191, 0.03);
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        
-        .faq-answer p {
-            padding: 0 24px 20px;
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 16px;
-            line-height: 1.6;
-        }
-        
-        .faq-item.active .faq-toggle {
-            transform: rotate(45deg);
-        }
-        
-        .faq-item.active .faq-answer {
-            max-height: 300px;
-        }
-
-        /* Additional fonts - replacing Gilroy with Avenir since we're already using Avenir */
-        .section-title {
-            font-family: 'Avenir', sans-serif !important;
-            font-size: 48px;
-            font-weight: 900;
-            text-align: center;
-            color: transparent;
-            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--secondary-purple) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-            line-height: 1.2;
-            margin: 0 0 24px 0;
-            padding: 120px 0 24px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .section-subtitle {
-            font-family: 'Avenir', sans-serif !important;
-            font-size: 18px;
-            font-weight: 400;
-            font-style: italic;
-            text-align: center;
-            color: #CBD5E0;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-            max-width: 600px;
-            line-height: 1.6;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Updated How It Works section styling */
-        .how-it-works {
-            text-align: center;
-            margin-top: 120px;
-            margin-bottom: 120px;
-        }
-        
+        /* Updated How It Works timeline styling with perfect alignment */
         .steps-container {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin: 60px auto;
+            margin: 80px auto;
             position: relative;
             width: 100%;
             max-width: 1000px;
             padding: 0 20px;
         }
         
+        /* Clean horizontal teal bar in the background */
         .steps-container::before {
             content: '';
             position: absolute;
-            top: 32px;
-            left: 10%;
-            width: 80%;
+            top: 32px; /* Position exactly at center of the circles */
+            left: 2%;
+            width: 96%;
             height: 4px;
             background: var(--primary-light);
             z-index: 0;
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.7), 0 0 30px rgba(45, 212, 191, 0.4);
+            opacity: 0.9;
         }
         
         .step-item {
-            flex: 0 0 20%;
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             position: relative;
             z-index: 1;
+            padding: 0;
+            margin: 0 10px;
         }
         
         .step-number {
@@ -2420,11 +2238,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px; /* Larger number */
             font-weight: 700;
             color: white;
-            margin-bottom: 24px;
-            box-shadow: 0 0 15px rgba(45, 212, 191, 0.5);
+            margin-bottom: 32px; /* Space below the number */
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.7), 0 0 0 4px rgba(7, 7, 9, 0.95); /* Enhanced glow */
+            position: relative;
+            z-index: 2;
+            border: 2px solid rgba(255, 255, 255, 0.8); /* Add white border for better contrast */
         }
         
         .step-title {
@@ -2432,33 +2253,119 @@
             font-size: 20px;
             font-weight: 600;
             color: var(--text-light);
-            margin: 0 0 12px 0;
+            margin: 32px 0 12px 0; /* Space above the title */
+            position: relative;
+            z-index: 2;
         }
         
         .step-description {
             font-family: 'Avenir', sans-serif !important;
             font-size: 16px;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.5;
             margin: 0;
-            padding: 0 8px;
+            position: relative;
+            z-index: 2;
+            max-width: 200px; /* Control width to ensure equal sizing */
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .steps-container {
+                flex-direction: column;
+                gap: 60px;
+                align-items: center;
+            }
+            
+            .steps-container::before {
+                width: 4px;
+                height: 85%;
+                left: calc(50% - 2px);
+                top: 40px;
+                transform: none;
+            }
+            
+            .step-item {
+                flex: 0 0 100%;
+                width: 100%;
+                max-width: 320px;
+                margin: 0;
+            }
+            
+            .step-number {
+                margin-bottom: 20px;
+            }
+            
+            .step-title {
+                margin-top: 20px;
+            }
+            
+            .step-description {
+                max-width: 100%;
+            }
         }
         
         /* FAQ Section Styling */
         .faq-section {
-            margin-top: 120px;
-            margin-bottom: 120px;
+            margin-top: 80px; /* Reduce from 120px to 80px */
+            margin-bottom: 80px; /* Reduce from 120px to 80px */
             text-align: center;
         }
         
         .faq-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 60px auto 0;
-            padding: 0 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
+        
+        /* Trusted By Section Styling */
+        .trusted-by-section {
+            padding: 30px 0 20px; /* Further reduced padding to decrease gap */
+            text-align: center;
+            background: transparent;
+        }
+        
+        .trusted-by-title {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 20px; /* Further reduced margin to decrease gap */
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        /* Reduce space between sections */
+        .offerings-section {
+            padding-top: 20px; /* Reduced padding */
+            margin-top: 0;
+        }
+        
+        /* Remove unused CSS to clean up the file */
+        /*
+        .offerings-subheader {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+        
+        .offerings-subtitle {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+        
+        .offerings-description {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        */
         
         .faq-item {
             background: rgba(7, 7, 9, 0.8);
@@ -2551,16 +2458,17 @@
             
             .steps-container::before {
                 width: 4px;
-                height: 80%;
-                left: 50%;
-                top: 10%;
-                transform: translateX(-50%);
+                height: 85%;
+                left: calc(50% - 2px);
+                top: 40px;
+                transform: none;
             }
             
             .step-item {
                 flex: 0 0 100%;
                 width: 100%;
                 max-width: 320px;
+                margin: 0;
             }
             
             .faq-container {
@@ -2569,8 +2477,241 @@
             }
             
             .section-title {
-                padding: 80px 0 24px;
+                padding: 40px 0 15px; /* Reduced top padding from 60px to 40px */
                 font-size: 36px;
+            }
+        }
+
+        /* Spacing adjustments for better visual hierarchy */
+        .features-benefits-section {
+            margin-top: 80px; /* Increase from 40px to 80px for more breathing room */
+            padding-bottom: 20px; /* Add bottom padding */
+        }
+
+        .trusted-by-section {
+            padding: 40px 0 30px; /* Increased padding from 30px 0 20px */
+            margin-bottom: 20px; /* Add spacing after trusted-by section */
+        }
+
+        .offerings-section {
+            padding: 40px 0 60px; /* Increased padding from 20px 0 */
+            margin-top: 0;
+        }
+
+        .how-it-works {
+            margin-top: 100px; /* Add substantial space before How It Works section */
+            padding-top: 20px;
+            padding-bottom: 0; /* Reduce from 40px to 0 */
+            margin-bottom: 30px; /* Add a smaller bottom margin */
+        }
+
+        .faq-section {
+            margin-top: 60px; /* Reduce from 100px to 60px */
+            margin-bottom: 100px; /* Keep the same */
+            padding-top: 20px;
+        }
+
+        .contact-section {
+            padding: 60px 0 80px; /* Increase spacing */
+            margin-top: 20px;
+        }
+
+        /* Add more space between benefit items */
+        .benefits-grid {
+            gap: 35px; /* Increase from 30px for more breathing room */
+            margin-top: 60px; /* Increase from 40px */
+            margin-bottom: 40px; /* Add bottom margin */
+            position: relative;
+            padding-top: 20px; /* Add top padding */
+        }
+
+        /* Add a heading to the benefits section */
+        .benefits-section-title {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 40px;
+            font-weight: 800;
+            font-style: italic;
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 20px rgba(45, 212, 191, 0.7), 0 0 40px rgba(45, 212, 191, 0.4), 0 0 80px rgba(45, 212, 191, 0.2);
+            line-height: 1.2;
+            animation: headingGlow 4s infinite alternate;
+        }
+
+        /* Add more vertical space for steps timeline */
+        .steps-container {
+            margin: 80px auto; /* Increase from 60px */
+        }
+
+        /* Improve section title breathing room */
+        .section-title {
+            margin-bottom: 30px; /* Increase from 24px */
+            padding-top: 20px;
+        }
+
+        .section-subtitle {
+            margin-bottom: 50px; /* Adjusted from 30px */
+        }
+
+        /* Add more differentiation between sections */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.2), transparent);
+            margin: 60px auto;
+            max-width: 80%;
+            opacity: 0.6;
+        }
+
+        /* Smaller divider with less spacing specifically for timeline-faq transition */
+        .timeline-faq-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.15), transparent);
+            margin: 20px auto;
+            max-width: 60%;
+            opacity: 0.3;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: #aaa;
+            text-decoration: none;
+            margin: 0 20px;
+            padding: 8px 2px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-light);
+            text-shadow: 0 0 8px rgba(45, 212, 191, 0.6);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary-light);
+            text-shadow: 0 0 8px rgba(45, 212, 191, 0.6);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary-light);
+            box-shadow: 0 0 8px rgba(45, 212, 191, 0.6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            width: 100%;
+            background: rgba(7, 7, 9, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 12px 50px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 25px rgba(0, 0, 0, 0.7);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+        }
+
+        /* Mobile navbar styles */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .mobile-menu-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            border-radius: 3px;
+            background: var(--primary-light);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(45, 212, 191, 0.5);
+        }
+        
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .navbar.scrolled {
+                padding: 10px 20px;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 250px;
+                background: rgba(7, 7, 9, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding-top: 80px;
+                transition: all 0.4s ease;
+                z-index: 1000;
+                border-left: 1px solid rgba(45, 212, 191, 0.2);
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links a {
+                margin: 15px 0;
+                font-size: 18px;
+                padding: 10px 20px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-links a::after {
+                bottom: 5px;
+            }
+            
+            /* Hamburger animation */
+            .mobile-menu-btn.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            
+            .mobile-menu-btn.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .mobile-menu-btn.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
             }
         }
     </style>
@@ -2621,13 +2762,20 @@
                 <span>Chatflow Automations</span>
             </div>
             <div class="nav-links">
-                <a href="#" class="active">Our Offerings</a>
-                <a href="#">FAQs</a>
+                <a href="#offerings">Our Offerings</a>
+                <a href="#benefits">Benefits</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#faq">FAQs</a>
             </div>
             <div class="contact-btn-container">
                 <button class="contact-btn scramble-button" data-target-text="Contact Sales">
                     <span class="button-text">Contact Sales</span>
                 </button>
+            </div>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
 
@@ -2657,10 +2805,61 @@
         </div>
     </section>
 
-    <section class="offerings-section">
+    <!-- Trusted By Section -->
+    <section class="trusted-by-section">
+        <div class="container">
+            <h3 class="trusted-by-title">Trusted by Businesses, Nonprofits, Agencies, and Schools</h3>
+            <div class="partners-wrapper">
+                <div class="logo-carousel">
+                    <div class="logo-slide">
+                        <img src="bizbuzznfp_logo.jpeg" alt="BizBuzzNFP">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="HE logo1.png" alt="HE">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="Prilo.png" alt="Prilo">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="qt=q_95.webp" alt="Company">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="teemate3.png" alt="Teemate">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="templace.png" alt="Templace">
+                    </div>
+                    <!-- Duplicate logos for continuous scrolling -->
+                    <div class="logo-slide">
+                        <img src="bizbuzznfp_logo.jpeg" alt="BizBuzzNFP">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="HE logo1.png" alt="HE">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="Prilo.png" alt="Prilo">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="qt=q_95.webp" alt="Company">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="teemate3.png" alt="Teemate">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="templace.png" alt="Templace">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual divider -->
+    <div class="section-divider"></div>
+
+    <section class="offerings-section" id="offerings">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title fade-in">Our Offerings</h2>
+                <h2 class="section-title" style="color: white; text-shadow: 0 0 20px rgba(45, 212, 191, 0.7), 0 0 40px rgba(45, 212, 191, 0.4), 0 0 80px rgba(45, 212, 191, 0.2); background: none; -webkit-background-clip: initial; background-clip: initial; animation: headingGlow 4s infinite alternate; font-style: italic;">Our Offerings</h2>
                 <p class="section-subtitle fade-in">Comprehensive AI solutions tailored to your business needs</p>
             </div>
             
@@ -2674,7 +2873,7 @@
                         <p class="offering-description">Intelligent voice assistants that handle calls and customer interactions with human-like conversations. Perfect for customer service, sales, and appointment scheduling.</p>
                     </div>
                 </div>
-                
+
                 <div class="offering-card">
                     <div class="offering-image">
                         <img src="Lyro-conversation.png" alt="Conversational Chatbots">
@@ -2684,7 +2883,7 @@
                         <p class="offering-description">Sophisticated chat solutions that engage users with natural language understanding and processing. Available 24/7 to answer inquiries and guide customers through digital experiences.</p>
                     </div>
                 </div>
-                
+                    
                 <div class="offering-card">
                     <div class="offering-image">
                         <img src="1_yEUGIR8d-ZBoIvDMNTyTNw.png" alt="Backend Automation">
@@ -2695,123 +2894,136 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- New section: Features and Benefits -->
-            <div class="features-benefits-section" style="margin-top: 80px;">
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">⚡</div>
-                        <h3 class="benefit-title">Boost Productivity</h3>
-                        <p class="benefit-description">Reclaim up to 40% of your workweek by automating repetitive tasks, allowing your team to focus on high-value work.</p>
+        </div>
+    </section>
+
+    <!-- Visual divider -->
+    <div class="section-divider"></div>
+
+    <!-- New section: Features and Benefits -->
+    <div class="features-benefits-section" id="benefits">
+        <h2 class="benefits-section-title">Key Benefits</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon">⚡</div>
+                <h3 class="benefit-title">Boost Productivity</h3>
+                <p class="benefit-description">Reclaim up to 40% of your workweek by automating repetitive tasks, allowing your team to focus on high-value work.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">💰</div>
+                <h3 class="benefit-title">Reduce Costs</h3>
+                <p class="benefit-description">Cut operational expenses by up to 30% through streamlined processes and reduced manual intervention.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">🔄</div>
+                <h3 class="benefit-title">Seamless Integration</h3>
+                <p class="benefit-description">Easily connect with your existing tools and systems with our flexible API-first approach.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">📈</div>
+                <h3 class="benefit-title">Scale With Confidence</h3>
+                <p class="benefit-description">Our solutions grow with your business, ensuring consistent performance even as demands increase.</p>
+            </div>
+        </div>
+        
+        <div class="how-it-works" id="how-it-works">
+            <h2 class="section-title" style="color: white; text-shadow: 0 0 20px rgba(45, 212, 191, 0.7), 0 0 40px rgba(45, 212, 191, 0.4), 0 0 80px rgba(45, 212, 191, 0.2); background: none; -webkit-background-clip: initial; background-clip: initial; animation: headingGlow 4s infinite alternate; font-style: italic;">How It Works</h2>
+            <p class="section-subtitle">Our streamlined process ensures a smooth implementation of automation solutions for your business</p>
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <h4 class="step-title">Consultation</h4>
+                    <p class="step-description">Book a demo where we analyze your current workflows and identify automation opportunities.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <h4 class="step-title">Custom Design</h4>
+                    <p class="step-description">Our experts create tailored solutions aligned with your specific needs.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <h4 class="step-title">Feedback Call</h4>
+                    <p class="step-description">You provide feedback on our design and training to ensure it meets your requirements.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <h4 class="step-title">Implementation</h4>
+                    <p class="step-description">We seamlessly integrate our AI solutions into your existing systems.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Visual divider -->
+        <div class="section-divider"></div>
+        
+        <!-- Visual divider with reduced spacing -->
+        <div class="timeline-faq-divider"></div>
+        
+        <!-- FAQ Section -->
+        <div class="faq-section" id="faq">
+            <h2 class="section-title" style="color: white; text-shadow: 0 0 20px rgba(45, 212, 191, 0.7), 0 0 40px rgba(45, 212, 191, 0.4), 0 0 80px rgba(45, 212, 191, 0.2); background: none; -webkit-background-clip: initial; background-clip: initial; animation: headingGlow 4s infinite alternate; font-style: italic;">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Get answers to common questions about our automation services</p>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How quickly can you implement automation solutions?</h4>
+                        <div class="faq-toggle">+</div>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">💰</div>
-                        <h3 class="benefit-title">Reduce Costs</h3>
-                        <p class="benefit-description">Cut operational expenses by up to 30% through streamlined processes and reduced manual intervention.</p>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🔄</div>
-                        <h3 class="benefit-title">Seamless Integration</h3>
-                        <p class="benefit-description">Easily connect with your existing tools and systems with our flexible API-first approach.</p>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">📈</div>
-                        <h3 class="benefit-title">Scale With Confidence</h3>
-                        <p class="benefit-description">Our solutions grow with your business, ensuring consistent performance even as demands increase.</p>
+                    <div class="faq-answer">
+                        <p>Most implementations take 2-4 weeks from initial consultation to full deployment, depending on complexity. Simple automations can be live in as little as one week.</p>
                     </div>
                 </div>
-                
-                <div class="how-it-works">
-                    <h2 class="section-title">How It Works</h2>
-                    <p class="section-subtitle">Our streamlined process ensures a smooth implementation of automation solutions for your business</p>
-                    <div class="steps-container">
-                        <div class="step-item">
-                            <div class="step-number">1</div>
-                            <h4 class="step-title">Consultation</h4>
-                            <p class="step-description">Book a demo where we analyze your current workflows and identify automation opportunities.</p>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-number">2</div>
-                            <h4 class="step-title">Custom Design</h4>
-                            <p class="step-description">Our experts create tailored solutions aligned with your specific needs.</p>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-number">3</div>
-                            <h4 class="step-title">Feedback Call</h4>
-                            <p class="step-description">You provide feedback on our design and training to ensure it meets your requirements.</p>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-number">4</div>
-                            <h4 class="step-title">Implementation</h4>
-                            <p class="step-description">We seamlessly integrate our AI solutions into your existing systems.</p>
-                        </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What types of processes can you automate?</h4>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We specialize in automating repetitive tasks in customer service, data entry, document processing, lead qualification, appointment scheduling, and many other routine operations across various business functions.</p>
                     </div>
                 </div>
-                
-                <!-- FAQ Section -->
-                <div class="faq-section">
-                    <h2 class="section-title">Frequently Asked Questions</h2>
-                    <p class="section-subtitle">Get answers to common questions about our automation services</p>
-                    <div class="faq-container">
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h4>How quickly can you implement automation solutions?</h4>
-                                <div class="faq-toggle">+</div>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Most implementations take 2-4 weeks from initial consultation to full deployment, depending on complexity. Simple automations can be live in as little as one week.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h4>What types of processes can you automate?</h4>
-                                <div class="faq-toggle">+</div>
-                            </div>
-                            <div class="faq-answer">
-                                <p>We specialize in automating repetitive tasks in customer service, data entry, document processing, lead qualification, appointment scheduling, and many other routine operations across various business functions.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h4>Do I need technical expertise to use your solutions?</h4>
-                                <div class="faq-toggle">+</div>
-                            </div>
-                            <div class="faq-answer">
-                                <p>No technical expertise is required. Our solutions are designed to be user-friendly and our team handles all technical aspects of implementation and maintenance.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h4>How much can I expect to save with your automation solutions?</h4>
-                                <div class="faq-toggle">+</div>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Clients typically see 30-60% cost reduction in automated processes, with ROI often achieved within 3-6 months of implementation.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h4>What ongoing support do you provide after implementation?</h4>
-                                <div class="faq-toggle">+</div>
-                            </div>
-                            <div class="faq-answer">
-                                <p>We provide comprehensive support including monitoring, maintenance, regular performance reviews, and continuous optimization to ensure your automation solutions adapt to changing business needs.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <h4>Can your solutions integrate with our existing software?</h4>
-                                <div class="faq-toggle">+</div>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Yes, our automation solutions are designed to integrate seamlessly with most popular business software and platforms. We use APIs and custom connectors to ensure smooth data flow between systems.</p>
-                            </div>
-                        </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Do I need technical expertise to use your solutions?</h4>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No technical expertise is required. Our solutions are designed to be user-friendly and our team handles all technical aspects of implementation and maintenance.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How much can I expect to save with your automation solutions?</h4>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Clients typically see 30-60% cost reduction in automated processes, with ROI often achieved within 3-6 months of implementation.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What ongoing support do you provide after implementation?</h4>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We provide comprehensive support including monitoring, maintenance, regular performance reviews, and continuous optimization to ensure your automation solutions adapt to changing business needs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Can your solutions integrate with our existing software?</h4>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our automation solutions are designed to integrate seamlessly with most popular business software and platforms. We use APIs and custom connectors to ensure smooth data flow between systems.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Visual divider -->
+    <div class="section-divider"></div>
 
     <!-- Contact Sales Button Section -->
     <section class="contact-section">
@@ -2860,7 +3072,65 @@
             const CYCLES_PER_LETTER = 2;
             const SHUFFLE_TIME = 50;
             
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100, // Offset for navbar height
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active link
+                        document.querySelectorAll('.nav-links a').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // Scramble buttons
             const scrambleButtons = document.querySelectorAll('.scramble-button');
+            
+            // Set active navigation link based on scroll position
+            function setActiveNavLink() {
+                const scrollPosition = window.scrollY;
+                
+                // Get all sections with IDs
+                const sections = document.querySelectorAll('section[id], div[id="benefits"], div[id="how-it-works"], div[id="faq"]');
+                
+                // Check which section is currently in view
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120; // Offset for navbar height
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        // Remove active class from all navigation links
+                        document.querySelectorAll('.nav-links a').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        
+                        // Add active class to corresponding navigation link
+                        const activeLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }
+            
+            // Set initial active link
+            setActiveNavLink();
+            
+            // Update active link on scroll
+            window.addEventListener('scroll', setActiveNavLink);
             
             scrambleButtons.forEach(button => {
                 let intervalId = null;
@@ -2906,7 +3176,7 @@
                     clearInterval(intervalId);
                     textElement.textContent = originalText;
                     // Remove explicit width setting after animation
-                    setTimeout(() => {
+                setTimeout(() => {
                         button.style.width = '';
                     }, 100);
                 }
@@ -3044,6 +3314,41 @@
                     }
                 });
             });
+
+            // Sticky navbar with shadow on scroll
+            function handleNavbarScroll() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            
+            // Initialize navbar state
+            handleNavbarScroll();
+            
+            // Update navbar on scroll
+            window.addEventListener('scroll', handleNavbarScroll);
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileNavLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mobileNavLinks.classList.toggle('active');
+                });
+                
+                // Close mobile menu when a link is clicked
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenuBtn.classList.remove('active');
+                        mobileNavLinks.classList.remove('active');
+                    });
+                });
+            }
         });
     </script>
 </body>
