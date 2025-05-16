@@ -2336,7 +2336,7 @@
             text-align: center;
         }
         
-        /* Reduce space between sections */
+        /* Remove space between sections */
         .offerings-section {
             padding-top: 20px; /* Reduced padding */
             margin-top: 0;
@@ -2715,6 +2715,280 @@
                 transform: translateY(-9px) rotate(-45deg);
             }
         }
+
+        /* Legal Modal Styling */
+        .legal-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(7, 7, 9, 0.95);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: rgba(15, 15, 25, 0.97);
+            margin: 2% auto;
+            padding: 30px 40px;
+            width: 90%;
+            max-width: 950px;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 15px rgba(45, 212, 191, 0.3);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-light), transparent);
+            opacity: 0.7;
+        }
+        
+        .close-modal {
+            color: var(--primary-light);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: -10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .close-modal:hover {
+            color: white;
+            text-shadow: 0 0 8px rgba(45, 212, 191, 0.8);
+        }
+        
+        .legal-content {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 0 20px 20px 0;
+            margin-top: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-light) rgba(7, 7, 9, 0.3);
+        }
+        
+        /* Webkit scrollbar styling */
+        .legal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .legal-content::-webkit-scrollbar-track {
+            background: rgba(7, 7, 9, 0.3);
+            border-radius: 10px;
+        }
+        
+        .legal-content::-webkit-scrollbar-thumb {
+            background-color: var(--primary-light);
+            border-radius: 10px;
+        }
+        
+        .legal-modal h2 {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin: 0 0 10px 0;
+            padding-right: 30px;
+        }
+        
+        .legal-modal h3 {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin: 30px 0 15px 0;
+        }
+        
+        .legal-modal p {
+            font-family: 'Avenir', sans-serif !important;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin: 0 0 15px 0;
+        }
+        
+        .legal-modal p strong {
+            color: var(--text-light);
+        }
+        
+        .last-updated {
+            font-style: italic;
+            opacity: 0.7;
+            margin-bottom: 20px !important;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+                margin: 5% auto;
+            }
+            
+            .legal-content {
+                padding-right: 10px;
+            }
+            
+            .legal-modal h2 {
+                font-size: 24px;
+                margin-right: 25px;
+            }
+            
+            .legal-modal h3 {
+                font-size: 18px;
+            }
+            
+            .legal-modal p {
+                font-size: 14px;
+            }
+        }
+
+        /* AI Summarize button styling */
+        .ai-summarize-btn {
+            position: absolute;
+            top: 30px;
+            right: 80px;
+            background: rgba(45, 212, 191, 0.2);
+            border: 1px solid var(--primary-light);
+            color: var(--primary-light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ai-summarize-btn:hover {
+            background: rgba(45, 212, 191, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(45, 212, 191, 0.4);
+        }
+
+        .ai-icon {
+            font-size: 16px;
+        }
+
+        /* AI Summary popup styling */
+        .ai-summary-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 750px;
+            max-height: 80vh;
+            background: rgba(15, 15, 25, 0.98);
+            border-radius: 12px;
+            border: 1px solid var(--primary-light);
+            box-shadow: 0 0 30px rgba(45, 212, 191, 0.5);
+            z-index: 10000;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .summary-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin: 0;
+        }
+
+        .close-summary {
+            color: var(--primary-light);
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .close-summary:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .summary-content {
+            color: var(--text-light);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .summary-content p {
+            margin-bottom: 15px;
+            color: #CBD5E0;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+                margin: 5% auto;
+            }
+            
+            .legal-content {
+                padding-right: 10px;
+            }
+            
+            .legal-modal h2 {
+                font-size: 24px;
+                margin-right: 25px;
+            }
+            
+            .legal-modal h3 {
+                font-size: 18px;
+            }
+            
+            .legal-modal p {
+                font-size: 14px;
+            }
+
+            .ai-summarize-btn {
+                top: 25px;
+                right: 60px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .ai-summary-popup {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .summary-title {
+                font-size: 20px;
+            }
+        }
     </style>
     
     <!-- Ensure external scripts don't override our font settings -->
@@ -2786,21 +3060,21 @@
                     <span class="highlight">40% of <em>your workweek</em> is eaten</span><br>
                     <span class="highlight">by repetitive tasks</span>
                 </h1>
-                <p class="hero-subtext" style="animation: fadeInUp 0.8s ease forwards 0.2s; opacity: 0;">We design, implement, and manage AI-driven solutions for your frontend & backend<br>—so you can focus on growth while we handle the busy work.</p>
+                <p class="hero-subtext" style="animation: fadeInUp 0.8s ease forwards 0.2s; opacity: 0;">We design, implement, and manage AI-driven solutions for your frontend & backend<br>â€”so you can focus on growth while we handle the busy work.</p>
                 <div class="hero-buttons" style="animation: fadeInUp 0.8s ease forwards 0.4s; opacity: 0;">
                     <button class="btn-secondary scramble-button" data-target-text="Schedule a Demo">
                         <span class="button-text">Schedule a Demo</span>
                     </button>
                 </div>
                 <div class="rating-container" style="animation: fadeInUp 0.8s ease forwards 0.6s; opacity: 0;">
-                    <div class="star-rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <span class="rating-text">Trusted by 10+ companies</span>
+                                    <div class="star-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <span class="rating-text">Trusted by 10+ companies</span>
                 </div>
             </div>
         </div>
@@ -3052,8 +3326,8 @@
                     <div class="footer-column">
                         <h4>Legal</h4>
                         <ul>
-                            <li><a href="#">Terms of Service</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#" id="terms-link" onclick="document.getElementById('terms-modal').style.display='block'; document.body.style.overflow='hidden'; return false;">Terms of Service</a></li>
+                            <li><a href="#" id="privacy-link" onclick="document.getElementById('privacy-modal').style.display='block'; document.body.style.overflow='hidden'; return false;">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
@@ -3064,9 +3338,245 @@
         </div>
     </footer>
 
+    <!-- Terms of Service Modal -->
+    <div id="terms-modal" class="legal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms of Service</h2>
+                <span class="close-modal" onclick="document.getElementById('terms-modal').style.display='none';">&times;</span>
+                <button class="ai-summarize-btn" onclick="openSummary('terms-summary')">
+                    <span class="ai-icon">🤖</span> AI Summarize
+                </button>
+            </div>
+            <div class="legal-content">
+                <p class="last-updated">Last Updated: May 15, 2025</p>
+                <p>These Terms of Service ("Agreement") govern your access to and use of the Chatflow Automations website (chatflowautomations.com), our APIs, platform, and all related content, features, and services (collectively, "Services"). By browsing, registering, requesting a demo, or otherwise using the Services, you agree to be bound by this Agreement and our Privacy Policy. If you do not agree, please discontinue use immediately. You must be at least 18 years old and possess the legal capacity to enter into a binding contract.</p>
+                
+                <h3>1. Services Overview</h3>
+                <p>1.1 End-to-End AI Automations. Chatflow Automations specializes in designing, building, and managing AI-driven solutions—voice agents that handle calls with natural language understanding, chatbots that engage website visitors, and backend workflows that synchronize your CRM, ERP, and ticketing systems. Our goal is to reclaim up to 40% of repetitive tasks, so your team can focus on strategic work.</p>
+                <p>1.2 Structured Delivery Process. Each engagement follows four phases:</p>
+                <p>Consultation: We hop on a call to understand your needs, listen to your recommendations, and map your current processes so we can identify the highest-value automation opportunities.</p>
+                <p>Custom Design: Our experts create a tailored solution—complete with flow diagrams, integration points, and conversational scripts—that is precisely aligned with your requirements.</p>
+                <p>Feedback Call: You review our design, share any tweaks or questions, and together we refine the solution until it fully meets your goals.</p>
+                <p>Implementation: We seamlessly integrate and deploy your AI automation into your existing systems, then validate performance against your KPIs.</p>
+                
+                <h3>2. Accounts & Eligibility</h3>
+                <p>2.1 Registration Requirements.</p>
+                <p>To access certain Services—like booking a demo, downloading automations & APIs, or receiving a custom proposal—you must complete our registration form. We'll ask for your name, job title, company, industry, and a brief description of your current workflows or pain points. By submitting this information, you confirm that you're at least 18 years old and have the authority to represent your organization.</p>
+                <p>2.2 Use of Registration Information.</p>
+                <p>We use your details to coordinate discovery calls and tailor our initial recommendations. You'll receive relevant resources—case studies, technical overviews, pricing guides—and timely updates about your project. Your information is stored securely and never sold to third parties; please see our Privacy Policy for full details.</p>
+                <p>2.3 Keeping Your Information Current.</p>
+                <p>If your contact details or role change, simply email info@chatflowautomations.com. Prompt updates ensure we can continue to reach you with scheduling notices, product briefings, and critical security alerts without interruption.</p>
+                <p>2.4 Refusal or Cancellation.</p>
+                <p>Chatflow reserves the right to decline or cancel any registration that appears incomplete, inaccurate, or fraudulent. In such cases, we may pause demo scheduling and outreach until valid information is provided.</p>
+                
+                <h3>3. Fees, Invoicing & Payment</h3>
+                <p>3.1 Order-Based Pricing. All fees, deliverables, milestones, and payment schedules are set forth in a mutually executed Order Form or Statement of Work ("Order"). Unless otherwise specified, all fees are denominated in U.S. dollars.</p>
+                <p>3.2 Payment Terms. Invoices are due within thirty (30) days of issuance. Overdue balances accrue interest at 1.5% per month (18% annually). If you fail to cure an overdue balance within ten (10) days of written notice, we may suspend Services until payment is received.</p>
+                <p>3.3 Taxes & Fees. You are responsible for all transaction fees, banking charges, and any sales, use, VAT, or other taxes (excluding taxes based on Chatflow's net income).</p>
+                <p>3.4 Fee Adjustments. We may revise our standard fee schedule upon thirty (30) days' prior written notice. Fees under existing, signed Orders remain unchanged unless mutually agreed in writing.</p>
+                
+                <h3>4. Customer Content & Data Use</h3>
+                <p>4.1 Ownership & License. You retain all rights to your Customer Content—any data, documents, or media you upload. By submitting Customer Content, you grant Chatflow a non-exclusive, worldwide, royalty-free license to use, store, and process it solely to deliver the Services.</p>
+                <p>4.2 Data Protection & Compliance. We implement industry-standard safeguards—encryption at rest and in transit, SOC-2 controls, and regular security audits—to protect your data. We will only access or disclose Customer Content as necessary to provide the Services or as legally required.</p>
+                <p>4.3 Retention & Deletion. Upon termination or at your request, we will securely delete or return your Customer Content within thirty (30) days, unless retention is required by law or a separate agreement.</p>
+                
+                <h3>5. Intellectual Property & Feedback</h3>
+                <p>5.1 Custom Configurations & Tools.</p>
+                <p>While we leverage platforms like Make.com and other third-party services to power your automations, all custom workflows, templates, scripts, and integration Blueprints that Chatflow develops are our proprietary configurations. The underlying platforms, APIs, or software (e.g., Make.com, Zapier, CRM/ERP connectors) remain the property of their respective providers and are used under their standard licensing terms.</p>
+                <p>5.2 License to Use Deliverables.</p>
+                <p>Upon full payment, we grant you a non-exclusive, non-transferable license to operate the custom workflows and assets we deliver, solely for your internal business purposes. You may not sublicense, redistribute, or otherwise share these proprietary configurations outside your organization without our prior written consent.</p>
+                <p>5.3 Third-Party & Open-Source Components.</p>
+                <p>Any open-source libraries or third-party modules embedded within your automations are subject to their original license terms. You agree to comply with those terms, and Chatflow disclaims ownership of those components—our role is to integrate them, not relicense them.</p>
+                
+                <h3>6. Confidentiality</h3>
+                <p>6.1 Definition. "Confidential Information" includes non-public business, technical, or financial information exchanged in connection with the Services that is marked confidential or that would reasonably be considered confidential.</p>
+                <p>6.2 Obligations. Each party will (a) use Confidential Information only to perform its obligations, (b) restrict access to employees or contractors on a need-to-know basis under comparable confidentiality obligations, and (c) protect it with at least the same care it uses for its own confidential materials.</p>
+                <p>6.3 Duration. Confidentiality obligations survive for three (3) years post-termination, except for trade secrets, which remain confidential as long as they qualify under applicable law.</p>
+                
+                <h3>7. Support, Maintenance & Service Levels</h3>
+                <p>7.1 Standard Support. Included with every engagement, Standard Support offers ticket-based issue tracking with a one-business-day response target and critical-issue response within four hours.</p>
+                <p>7.2 Premium Support. For an additional fee, Premium Support provides 24/7 monitoring, a dedicated account manager, monthly performance reviews, and on-call engineering assistance.</p>
+                <p>7.3 Scheduled Maintenance. We will notify you at least seven (7) days in advance of planned maintenance windows—covering platform updates, security patches, and optimizations—and strive for off-peak hours to minimize disruption.</p>
+                
+                <h3>8. Warranties & Disclaimers</h3>
+                <p>8.1 Limited Warranty. We warrant the Services will be performed in a professional, workmanlike manner consistent with industry standards and that any deliverables will substantially conform to documented specifications.</p>
+                <p>8.2 Disclaimer. EXCEPT FOR THE LIMITED WARRANTY IN SECTION 8.1, SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT ANY OTHER WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.</p>
+                
+                <h3>9. Limitation of Liability & Indemnification</h3>
+                <p>9.1 Liability Cap. CHATFLOW'S AGGREGATE LIABILITY FOR CLAIMS ARISING UNDER THIS AGREEMENT SHALL NOT EXCEED THE TOTAL FEES PAID BY YOU UNDER THE APPLICABLE ORDER IN THE TWELVE (12) MONTHS PRIOR TO THE EVENT GIVING RISE TO THE CLAIM.</p>
+                <p>9.2 Exclusion of Damages. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, BUSINESS INTERRUPTION, OR DATA LOSS, EVEN IF ADVISED OF THE POSSIBILITY.</p>
+                <p>9.3 Indemnification. You agree to defend, indemnify, and hold harmless Chatflow and its officers, directors, employees, and agents from any third-party claims arising from your breach of this Agreement, your negligent or willful misconduct, or your infringement of third-party rights.</p>
+                
+                <h3>10. Term, Termination & Post-Termination</h3>
+                <p>10.1 Term. This Agreement is effective upon your first use of the Services and continues until all Orders expire or are terminated.</p>
+                <p>10.2 Termination for Cause. Either party may terminate for material breach if the other fails to cure within thirty (30) days of written notice. Chatflow may also immediately suspend or terminate for legal requirements, security risks, or account violations.</p>
+                <p>10.3 Post-Termination. Upon termination, you must pay all accrued fees. We will delete or return your Customer Content per Section 4 and cease all Services.</p>
+                
+                <h3>11. Governing Law & Dispute Resolution</h3>
+                <p>This Agreement is governed by Illinois law, without regard to conflict-of-law principles. Any dispute not resolved by good-faith negotiation will be submitted to binding arbitration in Chicago, Illinois, under the American Arbitration Association's Commercial Rules. The arbitrator's decision is final and may be entered in any court with jurisdiction.</p>
+                
+                <h3>12. Miscellaneous</h3>
+                <p>Modifications: Material changes to these Terms take effect thirty (30) days after notice via our website or email; continued use constitutes acceptance.</p>
+                <p>Force Majeure: Neither party is liable for delays caused by events beyond reasonable control (e.g., natural disasters, strikes, pandemics, or government actions).</p>
+                <p>Notices: All notices must be in writing and sent to the account email info@chatflowautomations.com</p>
+                <p>Assignment: You may not assign this Agreement without our consent; Chatflow may assign freely.</p>
+                <p>Severability: If any provision is unenforceable, the remainder stays in effect.</p>
+                <p>Entire Agreement: This Agreement, along with any Orders and our Privacy Policy, constitutes the complete understanding between you and Chatflow and supersedes all prior agreements.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="legal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <span class="close-modal" onclick="document.getElementById('privacy-modal').style.display='none';">&times;</span>
+                <button class="ai-summarize-btn" onclick="openSummary('privacy-summary')">
+                    <span class="ai-icon">🤖</span> AI Summarize
+                </button>
+            </div>
+            <div class="legal-content">
+                <p class="last-updated">Last Updated: May 15, 2025</p>
+                <p>Chatflow Automations, Inc. ("Chatflow," "we," "us," or "our") is committed to protecting your privacy. This Policy describes how we collect, use, share, and safeguard your information when you visit our website (chatflowautomations.com), request demos or resources, participate in discovery or feedback sessions, or engage our AI automation services. By interacting with Chatflow—whether via our site, APIs, or direct consultations—you consent to the practices below. Please review this Policy periodically, as we may update it to reflect new features or legal requirements.</p>
+                
+                <h3>1) Information We Collect</h3>
+                <p>When you schedule a demo, download gated content, or request a custom proposal, we collect your name, job title, company, industry, email address, phone number, and a brief description of your automation goals. During discovery calls and feedback sessions, we record notes about your business processes and pain points. If you provide files—data sets, documents, or media—for use in your automations, we store that "Customer Content" securely. Additionally, when you visit our site or use our platform, we automatically log technical and usage details (IP address, browser type, device information, pages viewed, timestamps, and error logs) to help diagnose issues and improve performance.</p>
+                
+                <h3>2) How We Use Your Data</h3>
+                <p>We use your registration and profile information to coordinate consultations, tailor solution designs, and send you relevant materials such as case studies, technical overviews, and pricing guides. Customer Content is processed exclusively to build, configure, and optimize your automations, in strict accordance with our Terms of Service. Usage data informs our engineering roadmap — by analyzing feature adoption, error patterns, and performance metrics, we continuously enhance system stability, streamline workflows, and improve user experience.</p>
+                
+                <h3>3) Cookies & Tracking Technologies</h3>
+                <p>Our website employs cookies and similar tools to maintain secure sessions (so you remain logged in during demo bookings), remember form preferences, and protect against fraud. We also use analytics cookies (e.g., Google Analytics) to understand navigation paths, page load times, and drop-off points in our signup flows, enabling us to optimize content and functionality. Marketing pixels and retargeting tags may be used to deliver follow-up resources — such as webinar invitations or whitepaper downloads — but you may disable non-essential cookies via your browser settings, which could affect certain features.</p>
+                
+                <h3>4) Sharing & Disclosure</h3>
+                <p>We never sell or rent your personal information. We share data only with:</p>
+                <p>Service Providers (cloud hosting, analytics, payment processors) under strict confidentiality agreements;</p>
+                <p>Legal Authorities to comply with valid subpoenas or court orders or to protect our rights and the security of our Services;</p>
+                
+                <h3>5) Security Measures</h3>
+                <p>Protecting your data is a core responsibility. We employ industry-standard safeguards, including TLS encryption in transit, AES encryption at rest, regular penetration testing, and SOC-2–aligned controls to prevent unauthorized access or data breaches. Access to Customer Content is strictly limited to authorized personnel and essential service providers. In the unlikely event of a security incident, we will promptly notify affected clients and relevant authorities as required by law.</p>
+                
+                <h3>6) Data Retention</h3>
+                <p>We retain your registration details, Customer Content, and support records for as long as necessary to provide our Services and to meet legal, regulatory, or accounting obligations. Typically, data remains active during our engagement and for up to thirty-six (36) months after your last interaction — unless you request earlier deletion or extended retention is legally required.</p>
+                
+                <h3>7) Your Privacy Rights</h3>
+                <p>Depending on your jurisdiction, you may have the right to:</p>
+                <p>Access the personal information we hold about you;</p>
+                <p>Correct or update inaccurate data;</p>
+                <p>Request deletion or restriction of processing;</p>
+                <p>Obtain your data in a machine-readable format;</p>
+                <p>Withdraw consent for marketing communications.</p>
+                <p>To exercise any of these rights, email info@chatflowautomations.com. We will verify your identity and respond within the timeframes required by law.</p>
+                
+                <h3>8) Children's Privacy</h3>
+                <p>Our Services are intended for business and adult users; we do not knowingly collect personal information from anyone under 16. If you believe we have inadvertently received data from a minor, please contact info@chatflowautomations.com, and we will delete that information without undue delay.</p>
+                
+                <h3>9) International Data Transfers</h3>
+                <p>Although Chatflow is based in the United States, your data may be processed or stored by our affiliates or service providers in other countries. We implement appropriate safeguards — such as Standard Contractual Clauses — to ensure your Personal Data remains protected in accordance with this Policy and applicable laws.</p>
+                
+                <h3>10) Updates to This Policy</h3>
+                <p>We may revise this Privacy Policy to reflect new services, technology, or legal requirements. When we make material changes, we will post a prominent notice on our website and update the "Last Updated" date above. Your continued use of our site or Services after such changes indicates acceptance of the revised Policy.</p>
+                
+                <h3>11) Contact Us</h3>
+                <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please reach out to:</p>
+                <p>Email: info@chatflowautomations.com</p>
+                <p>Thank you for trusting Chatflow Automations with your data. We are committed to maintaining your confidence through transparent and responsible privacy practices.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service AI Summary Popup -->
+    <div id="terms-summary" class="ai-summary-popup">
+        <div class="summary-header">
+            <h3 class="summary-title">AI Summary: Terms of Service</h3>
+            <span class="close-summary" onclick="document.getElementById('terms-summary').style.display='none';">&times;</span>
+        </div>
+        <div class="summary-content">
+            <p>To engage with our Services (demos, downloads, proposals), you register with valid contact and company details, confirming you're 18+ and authorized to represent your organization.</p>
+            <p>Registration data is used to schedule calls, tailor recommendations, and send relevant materials; you're responsible for keeping it current, and we may decline incomplete or fraudulent submissions.</p>
+            <p>All project scope, deliverables, and fees are defined in a signed Order Form; invoices are due in 30 days, accrue 1.5% monthly interest if late, and you cover any transaction fees and applicable taxes.</p>
+            <p>You retain ownership of all uploaded Customer Content, granting us a limited license to use it solely for delivering the Services, with industry-standard encryption and SOC-2 controls safeguarding your data.</p>
+            <p>Upon project completion or termination, we'll delete or return your data within 30 days unless retention is legally required.</p>
+            <p>Custom workflows, templates, and scripts we build are our proprietary configurations, licensed to you for internal use only; all underlying platforms (e.g., Make.com, Zapier) remain the property of their respective providers.</p>
+            <p>Any open-source or third-party components included in your automations are governed by their original licenses, which you must also honor.</p>
+            <p>Both parties agree to protect each other's non-public business and technical information with strict confidentiality, a commitment that lasts at least three years after our relationship ends.</p>
+            <p>Standard Support includes one-business-day ticket responses (four-hour critical issue response), while Premium Support adds 24/7 monitoring, dedicated account management, and monthly performance reviews.</p>
+            <p>We warrant that Services will be performed professionally and conform to agreed specifications, but otherwise provide them "as is" without additional warranties, and our liability is capped at the fees you've paid us in the prior 12 months.</p>
+            <p>This Agreement runs from first use until all Orders expire or are terminated (30-day cure for breaches), is governed by Illinois law, and any disputes are resolved via binding arbitration in Chicago under AAA Commercial Rules.</p>
+        </div>
+    </div>
+
+    <!-- Privacy Policy AI Summary Popup -->
+    <div id="privacy-summary" class="ai-summary-popup">
+        <div class="summary-header">
+            <h3 class="summary-title">AI Summary: Privacy Policy</h3>
+            <span class="close-summary" onclick="document.getElementById('privacy-summary').style.display='none';">&times;</span>
+        </div>
+        <div class="summary-content">
+            <p>We collect your name, role, company details, automation objectives, discovery-call notes, uploaded Customer Content, and technical/usage data (IP, browser, pages viewed) when you engage our site or Services.</p>
+            <p>Your information is used to schedule and personalize demos, tailor solution designs, build and optimize your automations, and guide our product improvements.</p>
+            <p>We employ cookies and similar technologies to secure sessions, remember preferences, analyze site performance, and deliver relevant follow-up content.</p>
+            <p>We never sell or rent your personal information and only share data with trusted service providers under confidentiality obligations or when legally required.</p>
+            <p>We safeguard your data with industry-standard encryption, regular security audits, penetration testing, and SOC-2-aligned controls, and we will notify you of any breach as required by law.</p>
+            <p>We retain registration details, Customer Content, and support records for the duration of our engagement plus up to 36 months thereafter, unless you request earlier deletion.</p>
+            <p>You have the right to access, correct, delete, restrict, or port your personal data and withdraw consent for marketing by emailing info@chatflowautomations.com.</p>
+            <p>We do not knowingly collect information from anyone under 16 and will promptly delete any minor's data if discovered.</p>
+        </div>
+    </div>
+
+
     <script src="script.js"></script>
     
     <script>
+        // Global function to open AI summary popups
+        function openSummary(summaryId) {
+            const summaryElement = document.getElementById(summaryId);
+            if (summaryElement) {
+                summaryElement.style.display = 'block';
+                if (event) {
+                    event.stopPropagation();
+                }
+            }
+        }
+        
+        // Global function to close popups with Escape key - one at a time in a hierarchy
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                // Check if any AI summary popups are open first
+                const termsSummary = document.getElementById('terms-summary');
+                const privacySummary = document.getElementById('privacy-summary');
+                
+                // Close AI summaries first if they're open
+                if (termsSummary && termsSummary.style.display === 'block') {
+                    termsSummary.style.display = 'none';
+                    return; // Exit after closing only this popup
+                }
+                
+                if (privacySummary && privacySummary.style.display === 'block') {
+                    privacySummary.style.display = 'none';
+                    return; // Exit after closing only this popup
+                }
+                
+                // If no AI summaries are open, check for main modals
+                const termsModal = document.getElementById('terms-modal');
+                const privacyModal = document.getElementById('privacy-modal');
+                
+                if (termsModal && termsModal.style.display === 'block') {
+                    termsModal.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Restore scrolling
+                    return; // Exit after closing only this popup
+                }
+                
+                if (privacyModal && privacyModal.style.display === 'block') {
+                    privacyModal.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Restore scrolling
+                    return; // Exit after closing only this popup
+                }
+            }
+        });
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Text scrambling for buttons
             const CHARS = "!@#$%^&*():{};|,.<>/?";
@@ -3196,7 +3706,7 @@
                 });
                 
                 link.addEventListener('mouseleave', () => {
-                    link.style.color = 'var(--text-light)';
+                    link.style.color = link.classList.contains('active') ? 'var(--primary-light)' : 'var(--text-light)';
                 });
             });
             
@@ -3350,6 +3860,112 @@
                     });
                 });
             }
+            
+            // Legal modal functionality
+            const termsLink = document.getElementById('terms-link');
+            const privacyLink = document.getElementById('privacy-link');
+            const termsModal = document.getElementById('terms-modal');
+            const privacyModal = document.getElementById('privacy-modal');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            
+            // Function to open modal and disable body scroll
+            function openModal(modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Function to close modal and enable body scroll
+            function closeModal(modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Terms of Service link
+            if (termsLink) {
+                termsLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(termsModal);
+                });
+            }
+            
+            // Privacy Policy link
+            if (privacyLink) {
+                privacyLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(privacyModal);
+                });
+            }
+            
+            // Close buttons
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('.legal-modal');
+                    closeModal(modal);
+                });
+            });
+            
+            // Close modal when clicking outside of modal content
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('legal-modal')) {
+                    closeModal(e.target);
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (termsModal && termsModal.style.display === 'block') {
+                        closeModal(termsModal);
+                    }
+                    if (privacyModal && privacyModal.style.display === 'block') {
+                        closeModal(privacyModal);
+                    }
+                    
+                    // Also close the AI summaries
+                    const termsSummary = document.getElementById('terms-summary');
+                    const privacySummary = document.getElementById('privacy-summary');
+                    
+                    if (termsSummary && termsSummary.style.display === 'block') {
+                        termsSummary.style.display = 'none';
+                    }
+                    
+                    if (privacySummary && privacySummary.style.display === 'block') {
+                        privacySummary.style.display = 'none';
+                    }
+                }
+            });
+            
+            // AI Summary popup handling
+            const aiSummarizeButtons = document.querySelectorAll('.ai-summarize-btn');
+            const closeSummaryButtons = document.querySelectorAll('.close-summary');
+            const termsSummary = document.getElementById('terms-summary');
+            const privacySummary = document.getElementById('privacy-summary');
+            
+            // AI Summary is handled by the global openSummary function
+            
+            // Function to close summary
+            function closeSummary(summaryElement) {
+                if (summaryElement) {
+                    summaryElement.style.display = 'none';
+                }
+            }
+            
+            // Add click events to close buttons
+            closeSummaryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const summaryPopup = this.closest('.ai-summary-popup');
+                    closeSummary(summaryPopup);
+                });
+            });
+            
+            // Make sure AI Summary popups don't close parent modals when clicked
+            document.querySelectorAll('.ai-summary-popup').forEach(popup => {
+                popup.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+            
+            // Escape key handling is now handled by the global event listener
         });
     </script>
 </body>
