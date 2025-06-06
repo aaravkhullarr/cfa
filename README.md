@@ -1,40 +1,36 @@
-# Chatflow Automations Website
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A modern landing page for Chatflow Automations, an AI solutions company, with a cyberpunk-inspired design.
+## Getting Started
 
-## Features
+First, run the development server:
 
-- Responsive design that works on mobile, tablet, and desktop
-- Dark UI with cyberpunk design elements and glowing effects
-- Teal, purple, and gold accent colors on a dark background
-- Feature cards with visual elements (bar charts, donut charts, etc.)
-- Email signup form with neon glow effects
-- Animated scroll effects for better user engagement
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Project Structure
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- `index.html` - Main HTML structure with embedded CSS
-- `script.js` - JavaScript for interactivity and animations
-- Various brand logos used in the partners section
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Setup Instructions
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Simply open the `index.html` file in a web browser to view the website locally.
+## Learn More
 
-For development:
-- The website uses standard HTML, CSS, and JavaScript
-- No build process is required
-- Edit files directly and refresh the browser to see changes
+To learn more about Next.js, take a look at the following resources:
 
-## Design Notes
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-The website features a cyberpunk design with futuristic aesthetics:
-- Primary Color: #0A0A0F (Dark Background)
-- Primary Light: #2DD4BF (Teal Accent)
-- Secondary Purple: #A78BFA
-- Secondary Orange: #FBBF24
-- Font: Proxima Nova (with Satoshi as fallback)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## License
+## Deploy on Vercel
 
-This project is for demonstration purposes only.  
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
